@@ -132,50 +132,50 @@ export const data = [
 export const categories = [
   {
     id: 1,
-    name: "Fast Food",
+    name: 'Fast Food',
     image:
-      "https://images.pexels.com/photos/6947304/pexels-photo-6947304.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      'https://duyt4h9nfnj50.cloudfront.net/new_search_home_eats_icon/FastFood_BrowseHome@3x.png',
   },
   {
     id: 2,
-    name: "Pizza",
+    name: 'Pizza',
     image:
-      "https://images.pexels.com/photos/6947304/pexels-photo-6947304.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      'https://duyt4h9nfnj50.cloudfront.net/new_search_home_eats_icon/Pizza_BrowseHome@3x.png',
   },
   {
     id: 3,
-    name: "Wings",
+    name: 'Wings',
     image:
-      "https://images.pexels.com/photos/6947304/pexels-photo-6947304.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      'https://duyt4h9nfnj50.cloudfront.net/new_search_home_eats_icon/Wings_BrowseHome@3x.png',
   },
   {
     id: 4,
-    name: "Indian",
+    name: 'Indian',
     image:
-      "https://images.pexels.com/photos/6947304/pexels-photo-6947304.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      'https://duyt4h9nfnj50.cloudfront.net/new_search_home_eats_icon/Indian_BrowseHome@3x.png',
   },
   {
     id: 5,
-    name: "Latest Deals",
+    name: 'Latest Deals',
     image:
-      "https://images.pexels.com/photos/6947304/pexels-photo-6947304.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      'https://duyt4h9nfnj50.cloudfront.net/new_search_home_eats_icon/Deals_BrowseHome@3x.png',
   },
   {
     id: 6,
-    name: "Restaurant Rewards",
+    name: 'Restaurant Rewards',
     image:
-      "https://images.pexels.com/photos/6947304/pexels-photo-6947304.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      'https://duyt4h9nfnj50.cloudfront.net/new_search_home_eats_icon/RestoRewards_BrowseHome@3x.png',
   },
   {
     id: 7,
-    name: "Best Overall",
+    name: 'Best Overall',
     image:
-      "https://images.pexels.com/photos/6947304/pexels-photo-6947304.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      'https://duyt4h9nfnj50.cloudfront.net/new_search_home_eats_icon/TopEats_Browse%20Home@3x.png',
   },
   {
     id: 8,
-    name: "Shipped Free",
+    name: 'Shipped Free',
     image:
-      "https://images.pexels.com/photos/6947304/pexels-photo-6947304.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      'https://duyt4h9nfnj50.cloudfront.net/new_search_home_eats_icon/Placeholder_Plates@3x.png',
   },
 ];
