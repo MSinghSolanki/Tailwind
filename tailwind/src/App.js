@@ -13,6 +13,9 @@ function App() {
       <Cards />
       <Food />
       <Category />
+      <footer className="bg-black text-center text-white">
+        <h1>©2023 Hunger and Beat,Inc.All rights reserved. </h1>
+      </footer>
     </div>
   );
 }

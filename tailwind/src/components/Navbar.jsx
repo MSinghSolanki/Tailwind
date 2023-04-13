@@ -13,12 +13,25 @@ export const Navbar=()=>{
 
     const [close,setClose] =useState(false)
 
+    const startScoll=()=>{
+      setClose(false);
+
+      document.body.style.overflow='unset';
+    }
+    const stopscroll=()=>{
+      setClose(!close);
+
+      if(typeof window !='undefined' &&window.document){
+        document.body.style.overflow='hidden';
+      }
+    }
+
 
   return (
     <div className='flex max-w-[1640px] mx-auto justify-between 
     items-center p-4 '>
       <div className='flex items-center'>
-        <div onClick={()=>setClose(!close)}
+        <div onClick={stopscroll}
         className='cursor-pointer'>
     <FaAlignLeft className='text-4xl'/>
       </div>
@@ -37,7 +50,7 @@ export const Navbar=()=>{
    </div>
    {/* {Cart button} */}
    <button className='bg-black text-white hidden md:flex items-center py-2
-   rounded-full w-20'>
+   rounded-full w-20 hover:scale-105 duration-300'>
     <BsFillCartFill size={20} className='ml-4'/>Cart
    </button>
 
@@ -51,17 +64,17 @@ export const Navbar=()=>{
 
 
 {/* Close menu */}
-<AiOutlineClose onClick={()=>setClose(!close)}
+<AiOutlineClose onClick={startScoll}
  size={30} className='absolute right-4' cursor-pointer/>
 <img className='w-25' src={logo1}/>
 <nav>
   <ul className='flex flex-col p-4 text-gray-800'>
-    <li className='flex text-xl p-4'><TbTruckDelivery size={25} className="mr-4"/>Orders</li>
-    <li className='flex text-xl p-4'><MdFavorite size={25} className="mr-4"/>Favourites</li>
-    <li className='flex text-xl p-4'><FaWallet size={25} className="mr-4"/>Wallets</li>
-    <li className='flex text-xl p-4'><MdHelp size={25} className="mr-4"/>Promotions</li>
-    <li className='flex text-xl p-4'><BsFillSaveFill size={25} className="mr-4"/>Best Ones</li>
-    <li className='flex text-xl p-4'><FaUserFriends size={25} className="mr-4"/>Invite Friends</li>
+    <li className='flex text-xl p-4 cursor-pointer'><TbTruckDelivery size={25} className="mr-4 "/>Orders</li>
+    <li className='flex text-xl p-4 cursor-pointer'><MdFavorite size={25} className="mr-4"/>Favourites</li>
+    <li className='flex text-xl p-4 cursor-pointer'><FaWallet size={25} className="mr-4"/>Wallets</li>
+    <li className='flex text-xl p-4 cursor-pointer'><MdHelp size={25} className="mr-4"/>Promotions</li>
+    <li className='flex text-xl p-4 cursor-pointer'><BsFillSaveFill size={25} className="mr-4"/>Best Ones</li>
+    <li className='flex text-xl p-4 cursor-pointer'><FaUserFriends size={25} className="mr-4"/>Invite Friends</li>
   </ul>
 </nav>
    </div>
