@@ -1,17 +1,29 @@
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { data } from "../Data/data.js";
 import { useState } from "react";
-import axios from "axios"
+import axios from "axios";
 export const Food = () => {
-
-const[fav,setFav] = useState({
+  const [fav, setFav] = useState({
     name: "",
     category: "",
-    image:"",
+    image: "",
     price: "",
-})
+  });
 
   const [foods, setFoods] = useState(data);
+
+  const handlefavourite = (e) => {
+    console.log(e)
+      setFav({
+                   name:"",
+                   category: "",
+                   image:"",
+                   price: "",
+                  })
+                  console.log(fav)
+    axios.post("http://localhost:3000/favourite",fav).then(() => {});
+    
+  };
 
   const filtertype = (category) => {
     setFoods(
@@ -28,8 +40,6 @@ const[fav,setFav] = useState({
       })
     );
   };
-
-
 
   return (
     <div className="max-w-[1640px] m-auto px-4 py-12">
@@ -113,7 +123,7 @@ const[fav,setFav] = useState({
         </div>
       </div>
       {/* Display food */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-4" >
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
         {foods.map((e, ei) => (
           <div
             key={ei}
@@ -124,18 +134,11 @@ const[fav,setFav] = useState({
               alt={e.name}
               className="w-full h-[200px] object-cover rounded-t-lg"
             />
-              <MdOutlineFavoriteBorder size={30} onClick={()=>(
-                axios.post("http://localhost:3000/favourite",fav).then(()=>{
-                  setFav({
-                   name: "",
-                   category: "",
-                   image:"",
-                   price: "",
-                  })
-                })
-              )} 
-              className=" hover:text-red-600 cursor-pointer"/>
-
+            <MdOutlineFavoriteBorder
+              size={30}
+              onClick={handlefavourite(e)}
+              className=" hover:text-red-600 cursor-pointer"
+            />
 
             <div className="flex justify-between px-2 py-4">
               <p className="font-bold">{e.name}</p>
