@@ -1,7 +1,7 @@
-import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { data } from "../Data/data.js";
 import { useState } from "react";
 import axios from "axios"
+import { AiFillHeart } from "react-icons/ai";
 export const Food = () => {
 
 const[fav,setFav] = useState({
@@ -9,6 +9,12 @@ const[fav,setFav] = useState({
     category: "",
     image:"",
     price: "",
+})
+const[order,setOrder] = useState({
+  name: "",
+  category: "",
+  image:"",
+  price: "",
 })
 
   const [foods, setFoods] = useState(data);
@@ -29,10 +35,35 @@ const[fav,setFav] = useState({
     );
   };
 
+  let handlefavourite=(e)=>{
+   
+    setFav({
+      name: "",
+      category: "",
+      image:"",
+      price: "",
+    })
+   
+     axios.post("http://localhost:3000/favourite",fav).then(()=>{
 
+    })
+  }
+
+  let handleorder=(e)=>{
+    
+    setOrder({
+      name: "",
+      category: "",
+      image:"",
+      price: "",
+    })
+     axios.post("http://localhost:3000/favourite",order).then(()=>{
+
+    })
+  }
 
   return (
-    <div className="max-w-[1640px] m-auto px-4 py-12">
+    <div className="max-w-[1980px] m-auto px-4 py-12">
       <h1 className="text-red-600 font-bold text-4xl text-center">
         Top Rated Menu Items
       </h1>
@@ -124,24 +155,22 @@ const[fav,setFav] = useState({
               alt={e.name}
               className="w-full h-[200px] object-cover rounded-t-lg"
             />
-              <MdOutlineFavoriteBorder size={30} onClick={()=>(
-                axios.post("http://localhost:3000/favourite",fav).then(()=>{
-                  setFav({
-                   name: "",
-                   category: "",
-                   image:"",
-                   price: "",
-                  })
-                })
-              )} 
-              className=" hover:text-red-600 cursor-pointer"/>
+              <AiFillHeart size={40} onClick={()=>{
+                handlefavourite(e)
+              }}
+      
+              className=" hover:text-red-600 cursor-pointer text-gray-200"/>
 
-
+<button onClick={()=>{
+  handleorder(e)
+}} className="bg-gray-400 text-white rounded-r-3xl w-32 h-11 hover:bg-black hover:text-white my-3" >Order Now</button>
             <div className="flex justify-between px-2 py-4">
               <p className="font-bold">{e.name}</p>
+             
               <span className="bg-orange-500 text-white p-1 rounded-full">
                 {e.price}
               </span>
+              
             </div>
           </div>
         ))}

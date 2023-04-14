@@ -5,12 +5,14 @@ import { Cards } from "./components/Cards";
 import { Food } from "./components/Food";
 import { Category } from "./components/categories";
 import { Wallet } from "./components/Wallet";
+import { Promotions } from "./components/promotions";
+import { Orders } from "./components/Orders";
+import { PaymentGateway } from "./components/paymentgateway";
 
 function App() {
   return (
     <div>
-      <Food/>
-      
+<PaymentGateway/>
       {/* <Navbar />
       <Hero />
       <Cards />

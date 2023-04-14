@@ -7,7 +7,7 @@ import { FaGooglePay } from "react-icons/fa";
 export const Wallet = ()=>{
 
 return(
-    <div className="max-w-[1640px] mx-auto p-4 py-12">
+    <div className="max-w-[1980px] mx-auto p-4 py-12">
     <div >
       <h1 className="text-5xl bold sm:text-center">
         Wallet
@@ -15,7 +15,7 @@ return(
       </div>
 {/*         Overlay card */}
       <div className=" rounded-full justify-around flex py-20">
-        <div className="text-2xl w-56 text-center bg-slate-200  hover:scale-105 duration-300 rounded-2xl">
+        <div className="text-2xl w-56 text-center hover:scale-105 duration-300 rounded-2xl bg">
         <div >
        <p>Hunger and Beats </p> 
               <h2>₹0.00</h2>
@@ -50,10 +50,9 @@ return(
     <button className=" rounded-full bg-gray-300 my-4 w-72 hover:scale-105 duration-300">Add Payment Method or Redeem Gift Card</button>
 </div>
 
-<footer className="bg-black text-center text-white absolute bottom-0 left-0 right-0">
-        <h1>©2023 Hunger and Beat,Inc.All rights reserved. </h1>
-      </footer>
+
     </div>
+  
   
 );
 }

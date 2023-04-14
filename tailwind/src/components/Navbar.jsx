@@ -28,7 +28,7 @@ export const Navbar=()=>{
 
 
   return (
-    <div className='flex max-w-[1640px] mx-auto justify-between 
+    <div className='flex max-w-[1980px] mx-auto justify-between 
     items-center p-4 '>
       <div className='flex items-center'>
         <div onClick={stopscroll}
