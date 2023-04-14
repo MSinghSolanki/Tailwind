@@ -37,12 +37,12 @@ return(
     <div>
         <h1 className="text-2xl bold">Payment methods</h1>
     </div>
-    <div className="flex">
+    <div className="flex hover:bg-slate-200 w-52 rounded-2xl">
         <FaGooglePay size={60}/>
         <h3 className=" align-bottom py-4 pl-5 text-lg bold">Google Pay</h3>
         </div>
-        <div className="flex">
-        <BsCashCoin size={50}/>
+        <div className="flex hover:bg-slate-200 w-52 rounded-2xl py-2">
+        <BsCashCoin size={40} />
         <h3 className="pl-8 text-lg ">Cash</h3>
     
     
@@ -50,7 +50,10 @@ return(
     <button className=" rounded-full bg-gray-300 my-4 w-72 hover:scale-105 duration-300">Add Payment Method or Redeem Gift Card</button>
 </div>
 
+<footer className="bg-black text-center text-white absolute bottom-0 left-0 right-0">
+        <h1>©2023 Hunger and Beat,Inc.All rights reserved. </h1>
+      </footer>
     </div>
-
+  
 );
 }

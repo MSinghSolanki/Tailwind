@@ -9,14 +9,15 @@ import { Wallet } from "./components/Wallet";
 function App() {
   return (
     <div>
+      <Food/>
       
       {/* <Navbar />
       <Hero />
       <Cards />
       <Food />
-      <Category /> */}
-    <Wallet/>
-      {/* <footer className="bg-black text-center text-white">
+      <Category /> 
+     <Wallet/>
+       <footer className="bg-black text-center text-white">
         <h1>©2023 Hunger and Beat,Inc.All rights reserved. </h1>
       </footer> */}
     </div>
