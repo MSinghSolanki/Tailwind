@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 
 export const Orders=()=>{
     const [ors,setOrs] =useState([])
 
-    const Orders =  axios.get("http://localhost:8080/orders").then((data)=>{
+    const Orders =()=>{  axios.get("http://localhost:8080/orders").then((data)=>{
         setOrs(data.data)
     })
+    };
+useEffect(()=>{
+    Orders();
+},[])
+
 return(
 
     <div>
@@ -19,28 +24,47 @@ return(
   <h1 className=" text-red-500 my-3">Continue Shopping</h1>
 </div>
 </div>
-<div className=" pt-28">
-  <div className=" flex flex-wrap -ml-16 -mr-16">
+<div className=" pt-28 flex justify-around">
+  <div className="">
         {ors.map((e, ei) => (
           <div
             key={ei}
-            className="flex max-w-md max-h-52" >
+            className="flex max-w-md max-h-52 shadow-2xl bg-slate-100" >
             <img
               src={e.image}
               alt={e.name}
               className="w-32 h-32 object-cover rounded-t-lg"/>
+            <div className="flex">
               <div>
               <p className="font-bold pl-4 pt-14 text-3xl">{e.name}</p>
              </div>
-              <div>
-              <p>${e.price}</p>
+              <div className=" flex flex-col-reverse">
+              <p className=" ml-10">${e.price}</p>
+                </div>
                 </div>
 
                 </div>    
+        
         ))}
         </div>
+        <div>
+        <div >
+        <h1 className="text-5xl font-bold ">Order Summary</h1>
+        </div>
+        <div className=" bg-gray-100 mt-24 shadow-2xl rounded-2xl h-40">
+            <h1 className=" h-10">Product Total</h1>
+            <h1 className=" h-10">Total</h1>
+            <h1 className=" h-10">Have a Coupon?</h1>
+        </div>
+        <div>
+        <button className=" bg-yellow-300 w-36 rounded-2xl 
+        mt-28 text-2xl hover:scale-105 duration-300">
+            Checkout</button>
+            </div>
+        </div>
+        
       </div>
-      <button className=" bg-yellow-300 w-36 rounded-3xl mt-28 text-3xl">Checkout</button>
+     
     </div>
 )
 

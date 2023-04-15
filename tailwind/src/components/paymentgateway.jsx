@@ -3,33 +3,29 @@ import React from "react";
 export const PaymentGateway = ()=>{
 
     return(
-        <div className="bg-gray-200 text-2xl max-w-xl ">
+        <div className=" rounded-xl text-2xl max-w-xl shadow-2xl my-48 border-gray-500 bg-white">
           <div className="flex">
             <div>
-                <h2>Email</h2>
-                <input type="email" placeholder="Enter Email"/>
-            </div>
-            <div className="pl-4">
-                <h2>Password</h2>
-                <input type="password"/>
+                <h2  >Email</h2>
+                <input className=" border-2 border-black" type="email" placeholder="Enter Email"/>
             </div>
           </div>
           <div>
             <h1>Address</h1>
-            <input type="text" placeholder="Enter Your Address"/>
+            <input  className=" border-2 border-black" type="text" placeholder="Enter Your Address"/>
           </div>
           <div>
             <h1>PinCode</h1>
-            <input type="Number" placeholder="Enter PinCode"/>
+            <input  className=" border-2 border-black" type="Number" placeholder="Enter PinCode"/>
           </div>
           <div>
             <h1>City</h1>
-            <input type="text" placeholder="Enter City"/>
+            <input  className=" border-2 border-black" type="text" placeholder="Enter City"/>
           </div>
 <div>
     <h1>State</h1>
     <div>
-        <select>
+        <select  className=" border-2 border-black">
             <option>Choose</option>
             <option>...</option>
         </select>
