@@ -1,11 +1,83 @@
 {
   "favourite": [
     {
-      "name": "",
-      "category": "",
-      "image": "",
-      "price": "",
-      "id": 1
+      "id": 1,
+      "name": "Double Cheeseburger",
+      "category": "burger",
+      "image": "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "price": "$$$$"
+    },
+    {
+      "id": 2,
+      "name": "Bacon Cheeseburger",
+      "category": "burger",
+      "image": "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "price": "$"
+    },
+    {
+      "id": 4,
+      "name": "Loaded Burger",
+      "category": "burger",
+      "image": "https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "price": "$$$"
+    },
+    {
+      "id": 3,
+      "name": "Mushroom Burger",
+      "category": "burger",
+      "image": "https://images.pexels.com/photos/262959/pexels-photo-262959.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "price": "$$"
+    },
+    {
+      "id": 5,
+      "name": "Feta & Spinnach",
+      "category": "pizza",
+      "image": "https://images.pexels.com/photos/769289/pexels-photo-769289.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "price": "$$"
+    },
+    {
+      "id": 6,
+      "name": "Supreme Pizza",
+      "category": "pizza",
+      "image": "https://images.pexels.com/photos/1640770/pexels-photo-1640770.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "price": "$$$"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "name": "Double Cheeseburger",
+      "category": "burger",
+      "image": "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "price": "$$$$"
+    },
+    {
+      "id": 15,
+      "name": "Chicken Tenders",
+      "category": "chicken",
+      "image": "https://images.pexels.com/photos/8472749/pexels-photo-8472749.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "price": "$"
+    },
+    {
+      "id": 16,
+      "name": "Chicken Kabob",
+      "category": "chicken",
+      "image": "https://images.pexels.com/photos/8472749/pexels-photo-8472749.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "price": "$$$"
+    },
+    {
+      "id": 13,
+      "name": "Wings",
+      "category": "chicken",
+      "image": "https://images.pexels.com/photos/6947256/pexels-photo-6947256.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "price": "$$"
+    },
+    {
+      "id": 14,
+      "name": "Baked Chicken",
+      "category": "chicken",
+      "image": "https://images.pexels.com/photos/6947304/pexels-photo-6947304.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "price": "$$$$"
     }
   ]
 }

@@ -36,31 +36,29 @@ const[order,setOrder] = useState({
   };
 
   let handlefavourite=(e)=>{
-   
     setFav({
       name: "",
       category: "",
       image:"",
       price: "",
     })
-   
-     axios.post("http://localhost:3000/favourite",fav).then(()=>{
-
+     axios.post("http://localhost:8080/favourite",e).then(()=>{
+      
     })
   }
-
   let handleorder=(e)=>{
-    
     setOrder({
       name: "",
       category: "",
       image:"",
       price: "",
     })
-     axios.post("http://localhost:3000/favourite",order).then(()=>{
-
+     axios.post("http://localhost:8080/orders",e).then(()=>{
+      
     })
   }
+
+ 
 
   return (
     <div className="max-w-[1980px] m-auto px-4 py-12">
@@ -156,12 +154,14 @@ const[order,setOrder] = useState({
               className="w-full h-[200px] object-cover rounded-t-lg"
             />
               <AiFillHeart size={40} onClick={()=>{
+                console.log(e)
                 handlefavourite(e)
               }}
       
               className=" hover:text-red-600 cursor-pointer text-gray-200"/>
 
 <button onClick={()=>{
+  console.log(e)
   handleorder(e)
 }} className="bg-gray-400 text-white rounded-r-3xl w-32 h-11 hover:bg-black hover:text-white my-3" >Order Now</button>
             <div className="flex justify-between px-2 py-4">

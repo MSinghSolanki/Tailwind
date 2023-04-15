@@ -8,11 +8,13 @@ import { Wallet } from "./components/Wallet";
 import { Promotions } from "./components/promotions";
 import { Orders } from "./components/Orders";
 import { PaymentGateway } from "./components/paymentgateway";
+import { Favourite } from "./components/favourite";
 
 function App() {
   return (
     <div>
-<PaymentGateway/>
+      <Orders/>
+
       {/* <Navbar />
       <Hero />
       <Cards />
