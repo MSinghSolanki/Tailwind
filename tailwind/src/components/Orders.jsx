@@ -5,8 +5,56 @@ import { useState } from "react";
 export const Orders=()=>{
     const [ors,setOrs] =useState([])
 
-    const Orders =()=>{  axios.get("http://localhost:8080/orders").then((data)=>{
-        setOrs(data.data)
+
+    const loadScript =(src)=>{
+      return new Promise((resolve)=>{
+       const script =document.createElement('script')
+       script.src=src
+     
+       script.onload = ()=>{
+         resolve(true)
+       }
+     
+       script.onerror =()=>{
+         resolve(false)
+       }
+     
+       document.body.appendChild(script)
+      })
+       }
+     
+     const displayRazorpay =async(price)=>{
+       const res =await loadScript('https://checkout.razorpay.com/v1/checkout.js')
+     
+       if(!res){
+         alert("Your Payment failed")
+         return
+       }
+
+       const options ={
+        key: "rzp_test_8q6zwwQwJ27tKx",
+        currency:"INR",
+        price: price*100,
+        name:"Hungry and Beat",
+        description:"May your Hunger be Filled",
+        image:"./images/logo.png",
+
+       handler:function(response){
+        alert(response.razorpay_payment_id)
+        alert("payment Succesfully")
+       },
+       prefill:{
+        name:"Hunger and Beat"
+       }
+       };
+       const paymentObject = new window.Razorpay(options)
+       paymentObject.open()
+     }
+
+
+
+    const Orders =()=>{  axios.get("http://localhost:8080/orders").then((res)=>{
+        setOrs(res.data)
     })
     };
 useEffect(()=>{
@@ -42,6 +90,12 @@ return(
               <p className=" ml-10">${e.price}</p>
                 </div>
                 </div>
+                <div>
+                <button className=" bg-yellow-300 w-36 rounded-2xl 
+        mt-28 text-2xl hover:scale-105 duration-300"
+        onClick={()=>displayRazorpay(e.price)}>
+            Checkout</button>
+            </div>
 
                 </div>    
         
@@ -57,9 +111,7 @@ return(
             <h1 className=" h-10">Have a Coupon?</h1>
         </div>
         <div>
-        <button className=" bg-yellow-300 w-36 rounded-2xl 
-        mt-28 text-2xl hover:scale-105 duration-300">
-            Checkout</button>
+        
             </div>
         </div>
         

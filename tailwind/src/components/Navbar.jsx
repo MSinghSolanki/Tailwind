@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {FaUserFriends, FaWallet} from "react-icons/fa";
 import {FaAlignLeft} from  "react-icons/fa";
 import {FaSistrix} from "react-icons/fa"
@@ -8,8 +8,16 @@ import {TbTruckDelivery} from "react-icons/tb"
 import {MdHelp,MdFavorite} from "react-icons/md"
 import { useState } from 'react';
 import logo1 from "./images/logo.png"
-
+import axios from "axios";
 export const Navbar=()=>{
+
+
+  const [cartCount, setCartCount] = useState(0);
+
+  const updateCartCount = (count) => {
+    setCartCount(count);
+  }
+
 
     const [close,setClose] =useState(false)
 
@@ -51,6 +59,7 @@ export const Navbar=()=>{
    {/* {Cart button} */}
    <button className='bg-black text-white hidden md:flex items-center py-2
    rounded-full w-20 hover:scale-105 duration-300'>
+
     <BsFillCartFill size={20} className='ml-4'/>Cart
    </button>
 

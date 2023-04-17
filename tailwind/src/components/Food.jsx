@@ -1,9 +1,23 @@
 import { data } from "../Data/data.js";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios"
 import { AiFillHeart } from "react-icons/ai";
+import { CartContext } from "./cartContext";
 export const Food = () => {
 
+ 
+
+const count = ()=>{
+  axios.get("http://localhost:8080/orders").then((response)=>{
+   console.log(response.data)
+  })
+  console.log(count.length)
+}
+useEffect=()=>{
+  count();
+}
+
+ 
 const[fav,setFav] = useState({
     name: "",
     category: "",
@@ -154,14 +168,13 @@ const[order,setOrder] = useState({
               className="w-full h-[200px] object-cover rounded-t-lg"
             />
               <AiFillHeart size={40} onClick={()=>{
-                console.log(e)
+               
                 handlefavourite(e)
               }}
       
               className=" hover:text-red-600 cursor-pointer text-gray-200"/>
 
 <button onClick={()=>{
-  console.log(e)
   handleorder(e)
 }} className="bg-gray-400 text-white rounded-r-3xl w-32 h-11 hover:bg-black hover:text-white my-3" >Order Now</button>
             <div className="flex justify-between px-2 py-4">
