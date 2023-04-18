@@ -1,9 +1,19 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
+import { Address } from "./address";
 
 export const PaymentGateway = ()=>{
 
+  const [modal,showModal] = useState(false);
+
     return(
-        <div className=" rounded-xl text-2xl max-w-xl shadow-2xl my-48 border-gray-500 bg-white">
+<Fragment>
+      <div className="">
+        <button className=" bg-yellow-300 rounded-3xl w-52 h-11" onClick={()=>showModal(true)}>Add a Address</button>
+      </div>
+      <Address invisible={modal} onClose={()=>{
+        showModal(false)
+      }}>
+ <div className=" rounded-xl text-2xl max-w-xl shadow-2xl my-48 border-gray-500 bg-white">
           <div className="flex">
             <div>
                 <h2  >Email</h2>
@@ -31,7 +41,13 @@ export const PaymentGateway = ()=>{
         </select>
     </div>
 </div>
-<button className="bg-blue-300 rounded-full w-32">Sign In</button>
+<button className="bg-blue-300 rounded-full w-32 my-4">Sign In</button>
         </div>
+
+
+        </Address>
+      </Fragment>
+
+       
     )
 }
