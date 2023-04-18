@@ -13,16 +13,17 @@ import { Favourite} from "./components/favourite";
 function App() {
   return (
     <div>
-     
+     <Navbar/>
+     <Food/>
 
-      <Navbar />
+      {/* <Navbar />
       <Hero />
       <Cards />
       <Food />
       <Category /> 
        <footer className="bg-black text-center text-white">
         <h1>©2023 Hunger and Beat,Inc.All rights reserved. </h1>
-      </footer>
+      </footer> */}
     </div>
   );
 }

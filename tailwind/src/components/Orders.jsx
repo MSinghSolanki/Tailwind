@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
+import { PaymentGateway } from "./paymentgateway";
 
 export const Orders=()=>{
     const [ors,setOrs] =useState([])
@@ -62,8 +63,9 @@ useEffect(()=>{
 },[])
 
 return(
-
+    
     <div>
+      <PaymentGateway/>
       <div className="flex justify-around sm:my-10 sm:max-w-5xl xl:my-4 xl:max-w-6xl xl:mt-40">
 <div>
     <h1 className="text-4xl font-bold">Your Shopping Cart</h1>
