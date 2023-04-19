@@ -9,14 +9,24 @@ import {MdHelp,MdFavorite} from "react-icons/md"
 import { useState } from 'react';
 import logo1 from "./images/logo.png"
 import axios from "axios";
+
 export const Navbar=()=>{
 
+const[count,setCount] =useState([])
 
-  const [cartCount, setCartCount] = useState(0);
 
-  const updateCartCount = (count) => {
-    setCartCount(count);
-  }
+
+ const counts = ()=>{
+  axios.get("http://localhost:8080/orders").then((res)=>{
+setCount(res.data.length)
+
+  })
+
+}
+useEffect(()=>{
+counts();
+
+},[])
 
 
     const [close,setClose] =useState(false)
@@ -57,10 +67,10 @@ export const Navbar=()=>{
     <input className='bg-transparent p-2 focus:outline-none' type='text' placeholder='Search Food'/>
    </div>
    {/* {Cart button} */}
-   <button className='bg-black text-white hidden md:flex items-center py-2
-   rounded-full w-20 hover:scale-105 duration-300'>
+   <button className='bg-transparent hidden md:flex items-center py-2
+   rounded-full w-20 hover:scale-105 duration-300 flex pr-4'>
 
-    <BsFillCartFill size={20} className='ml-4'/>Cart
+    <BsFillCartFill size={20} className='ml-4'/><span className="mb-5 rounded-full bg-red">{count}</span>
    </button>
 
    {/* Mobile Menu */}
