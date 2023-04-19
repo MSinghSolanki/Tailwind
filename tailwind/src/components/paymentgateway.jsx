@@ -35,9 +35,7 @@ export const PaymentGateway = ()=>{
     </div>
 </div>
 <button className="bg-blue-300 rounded-full w-32">Sign In</button>
-<div>
-  <button onClick={()=>displayRazorpay(price)}/>
-</div>
+
 
         </div>
     )

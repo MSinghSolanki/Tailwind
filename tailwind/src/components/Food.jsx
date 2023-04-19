@@ -2,19 +2,9 @@ import { data } from "../Data/data.js";
 import { useEffect, useState } from "react";
 import axios from "axios"
 import { AiFillHeart } from "react-icons/ai";
-import { CartContext } from "./cartContext";
+
 export const Food = () => {
 
- 
-
-const count = ()=>{
-  axios.get("http://localhost:8080/orders").then((response)=>{
-   console.log(response.data)
-  })
-}
-useEffect=()=>{
-  count();
-}
 
  
 const[fav,setFav] = useState({

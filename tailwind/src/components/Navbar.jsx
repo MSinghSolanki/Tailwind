@@ -68,9 +68,9 @@ counts();
    </div>
    {/* {Cart button} */}
    <button className='bg-transparent hidden md:flex items-center py-2
-   rounded-full w-20 hover:scale-105 duration-300 flex pr-4'>
+   rounded-full w-20 hover:scale-105 duration-300  pr-4'>
 
-    <BsFillCartFill size={20} className='ml-4'/><span className="mb-5 rounded-full bg-red">{count}</span>
+    <BsFillCartFill size={30} className=' '/><span className=" bg-orange-300 text-white w-3 h-6 mb-5 rounded-full">{count}</span>
    </button>
 
    {/* Mobile Menu */}
@@ -91,8 +91,6 @@ counts();
     <li className='flex text-xl p-4 cursor-pointer'><TbTruckDelivery size={25} className="mr-4 "/>Orders</li>
     <li className='flex text-xl p-4 cursor-pointer'><MdFavorite size={25} className="mr-4"/>Favourites</li>
     <li className='flex text-xl p-4 cursor-pointer'><FaWallet size={25} className="mr-4"/>Wallets</li>
-    <li className='flex text-xl p-4 cursor-pointer'><MdHelp size={25} className="mr-4"/>Promotions</li>
-    <li className='flex text-xl p-4 cursor-pointer'><BsFillSaveFill size={25} className="mr-4"/>Best Ones</li>
     <li className='flex text-xl p-4 cursor-pointer'><FaUserFriends size={25} className="mr-4"/>Invite Friends</li>
   </ul>
 </nav>
