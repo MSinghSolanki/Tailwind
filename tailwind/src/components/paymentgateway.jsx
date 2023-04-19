@@ -1,6 +1,9 @@
+import axios from "axios";
 import React from "react";
 
 export const PaymentGateway = ()=>{
+
+
 
     return(
         <div className=" rounded-xl text-2xl max-w-xl shadow-2xl my-48 border-gray-500 bg-white">
@@ -32,6 +35,10 @@ export const PaymentGateway = ()=>{
     </div>
 </div>
 <button className="bg-blue-300 rounded-full w-32">Sign In</button>
+<div>
+  <button onClick={()=>displayRazorpay(price)}/>
+</div>
+
         </div>
     )
 }

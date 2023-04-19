@@ -11,7 +11,6 @@ const count = ()=>{
   axios.get("http://localhost:8080/orders").then((response)=>{
    console.log(response.data)
   })
-  console.log(count.length)
 }
 useEffect=()=>{
   count();
