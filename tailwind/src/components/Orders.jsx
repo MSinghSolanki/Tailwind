@@ -2,9 +2,18 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { PaymentGateway } from "./paymentgateway";
+import { Fragment } from "react";
+import {
+  Popover,
+  PopoverHandler,
+  PopoverContent,
+  Button,
+} from "@material-tailwind/react";
+import { Link } from "react-router-dom";
 
 export const Orders=()=>{
     const [ors,setOrs] =useState([])
+    const[totalprice,setTotalPrice] = useState(0)
 
 
     const loadScript =(src)=>{
@@ -35,7 +44,7 @@ export const Orders=()=>{
        const options ={
         key: "rzp_test_8q6zwwQwJ27tKx",
         currency:"INR",
-        price: price*100,
+        totalprice: totalprice*100,
         name:"Hungry and Beat",
         description:"May your Hunger be Filled",
         image:"./images/logo.png",
@@ -56,22 +65,32 @@ export const Orders=()=>{
 
     const Orders =()=>{  axios.get("http://localhost:8080/orders").then((res)=>{
         setOrs(res.data)
-    })
+        let total=0;
+        res.data.map((e)=>{
+          total=total+e.price;
+        });
+        setTotalPrice(total);
+       
+    });
     };
 useEffect(()=>{
     Orders();
 },[])
 
 return(
-    
     <div>
       <PaymentGateway/>
+    
+    <div>
+      
+
       <div className="flex justify-around sm:my-10 sm:max-w-5xl xl:my-4 xl:max-w-6xl xl:mt-40">
 <div>
     <h1 className="text-4xl font-bold">Your Shopping Cart</h1>
 </div>
 <div>
-  <h1 className=" text-red-500 my-3">Continue Shopping</h1>
+  <h1 className=" text-red-500 my-3">
+    <Link to="/">Continue Shopping</Link></h1>
 </div>
 </div>
 <div className=" pt-28 flex justify-around">
@@ -89,14 +108,11 @@ return(
               <p className="font-bold pl-4 pt-14 text-3xl">{e.name}</p>
              </div>
               <div className=" flex flex-col-reverse">
-              <p className=" ml-10">${e.price}</p>
+              <p className=" ml-10">{e.price}</p>
                 </div>
                 </div>
                 <div>
-                <button className=" bg-yellow-300 w-36 rounded-2xl 
-        mt-28 text-2xl hover:scale-105 duration-300"
-        onClick={()=>displayRazorpay(e.price)}>
-            Checkout</button>
+                
             </div>
 
                 </div>    
@@ -108,17 +124,29 @@ return(
         <h1 className="text-5xl font-bold ">Order Summary</h1>
         </div>
         <div className=" bg-gray-100 mt-24 shadow-2xl rounded-2xl h-40">
-            <h1 className=" h-10">Product Total</h1>
-            <h1 className=" h-10">Total</h1>
-            <h1 className=" h-10">Have a Coupon?</h1>
+            <h1 className=" h-10 font-bold text-2xl">Product Total:{totalprice}</h1>
+        <div>
+        <Popover placement="bottom">
+          <PopoverHandler>
+            <Button variant="gradient" className="text-2xl font-bond text-black">Have a Coupon?</Button>
+          </PopoverHandler>
+          <PopoverContent>
+            <input type="text" placeholder="Enter the Coupon" />
+          </PopoverContent>
+        </Popover>
+        </div>
         </div>
         <div>
-        
+        <button className=" bg-yellow-300 w-36 rounded-2xl 
+        mt-28 text-2xl hover:scale-105 duration-300"
+        onClick={()=>displayRazorpay(totalprice)}>
+            Checkout</button>
             </div>
         </div>
         
       </div>
      
+    </div>
     </div>
 )
 

@@ -1,14 +1,14 @@
 import React from "react";
 
 
-export const Promotions = ()=>{
+export const Invite = ()=>{
 
 
     return(
         <div className=" max-w-[1980px] mx-auto">
     <div className="">       
 <div className=" bg-yellow-300">
-<h1 className=" sm:text-left sm:text-5xl sm:mr-4 sm:pl-5 xl:text-center">Refer a friend to Western Union and earn rewards!</h1>
+<h1 className=" sm:text-left sm:text-5xl sm:mr-4 sm:pl-5 xl:text-center">Refer a friend to Hunger and Beat and earn rewards!</h1>
 <p className=" sm:text-left sm:pl-5 xl:text-center">You’ll both earn a $20 Amazon.com e-gift code*.</p>
 </div>
 <div>
@@ -18,7 +18,7 @@ export const Promotions = ()=>{
 </div>   
 <div className="bg-white">
     <h1 className=" sm:text-center sm:text-5xl sm:mr-4 sm:pl-5 ">Rewards for you and your friends</h1>
-    <p className="sm:text-center">Refer up to 25 friends to Western Union and get rewarded a $20 Amazon.com e-gift code* for every 
+    <p className="sm:text-center">Refer up to 25 friends to Hunger and Beat and get rewarded a $20 Amazon.com e-gift code* for every 
         friend you refer. Plus, each friend you refer will get a $20 Amazon.com e-gift code* for themselves.
         Simply, follow these 3 steps to start earning your rewards:</p>
 </div> 
