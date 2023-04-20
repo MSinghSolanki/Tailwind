@@ -78,7 +78,7 @@ counts();
    <button className='bg-transparent hidden md:flex items-center py-2
    rounded-full w-20 hover:scale-105 duration-300  pr-4'>
 
-    <BsFillCartFill size={30} className=' '/><span className=" bg-orange-300 text-white w-3 h-6 mb-5 rounded-full">{count}</span>
+<Link to="/orders" className="flex"><BsFillCartFill size={30} className/><span className=" bg-orange-300 text-white w-3 h-6 mb-5 rounded-full">{count}</span></Link>
    </button>
  
    

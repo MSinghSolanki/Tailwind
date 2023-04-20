@@ -69,7 +69,8 @@ const handlechange = (e)=>{
         showModal(false)
       }}>
       
- <div className=" rounded-xl text-2xl max-w-xl shadow-2xl my-48 border-gray-500 bg-white">
+ <div className=" rounded-xl text-2xl max-w-xl shadow-2xl my-48 border-gray-500 bg-white w-4/5">
+          
           <div className="flex">
             <div>
                 <h2  >Email</h2>
@@ -107,8 +108,11 @@ const handlechange = (e)=>{
   })
 
 }} className="bg-blue-300 rounded-full w-32 my-4">Submit</button>
+        
         </div>
-
+<div>
+  
+</div>
 
         </Address>
       </Fragment>

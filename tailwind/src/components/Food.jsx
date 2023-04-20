@@ -5,7 +5,7 @@ import { AiFillHeart } from "react-icons/ai";
 
 export const Food = () => {
 
-
+const[sortingMethod,setSortingMethod] =useState("none");
  
 const[fav,setFav] = useState({
     name: "",
@@ -30,13 +30,21 @@ const[order,setOrder] = useState({
     );
   };
   //  Filter price
-  const filterprice = (price) => {
-    setFoods(
-      data.filter((e) => {
-        return e.price === price;
-      })
-    );
+  const filterprice = {
+    none: { method: (a, b) => null },
+    ascending: { method: (b, a) => (a < b ? 1 : -1) },
+    descending: { method: (a, b) => (a > b ? -1 : 1) },
   };
+
+  useEffect(() => {
+    const method = filterprice[sortingMethod].method;
+    if (method) {
+      setFoods([...foods].sort((a, b) => method(a.price, b.price)));
+    } else {
+      setFoods(data);
+    }
+  }, [sortingMethod]);
+
 
   let handlefavourite=(e)=>{
     setFav({
@@ -109,40 +117,16 @@ const[order,setOrder] = useState({
         </div>
         {/* Filter price */}
         <div>
-          <p className="font-bold text-gray-700">Filter Price</p>
-          <div className="flex justify-between max-w-[390px] w-full">
-            <button
-              onClick={() => filterprice("$")}
-              className=" m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
-            >
-              $
-            </button>
-            <button
-              onClick={() => filterprice("$$")}
-              className=" m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
-            >
-              $$
-            </button>
-            <button
-              onClick={() => filterprice("$$$")}
-              className=" m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
-            >
-              $$$
-            </button>
-            <button
-              onClick={() => filterprice("$$$$")}
-              className=" m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
-            >
-              $$$$
-            </button>
-            <button
-              onClick={() => filterprice("$$$$$")}
-              className=" m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
-            >
-              $$$$$
-            </button>
-          </div>
-        </div>
+          
+          <select value={sortingMethod}
+          onChange={(e)=>setSortingMethod(e.target.value)}>
+        <option value="none" disabled>None</option>
+        <option value="ascending">Ascending</option>
+        <option value="descending">Descending</option>
+      </select>
+          
+       
+        
       </div>
       {/* Display food */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-4" >
@@ -176,7 +160,9 @@ const[order,setOrder] = useState({
             </div>
           </div>
         ))}
+        </div>
       </div>
     </div>
+    
   );
 };

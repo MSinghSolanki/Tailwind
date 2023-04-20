@@ -25,7 +25,7 @@ function App() {
         <Route path="favourite" element={<Favourite/>}/>
       </Routes>
     
-       <footer className="bg-black text-center text-white">
+       <footer className="bg-black text-center text-white right-0 left-0 relative">
         <h1>©2023 Hunger and Beat,Inc.All rights reserved. </h1>
       </footer>
     </div>

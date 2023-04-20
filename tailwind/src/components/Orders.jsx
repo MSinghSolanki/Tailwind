@@ -124,7 +124,7 @@ return(
         <h1 className="text-5xl font-bold ">Order Summary</h1>
         </div>
         <div className=" bg-gray-100 mt-24 shadow-2xl rounded-2xl h-40">
-            <h1 className=" h-10 font-bold text-2xl">Product Total:{totalprice}</h1>
+            <h1 className=" h-10 font-bold text-2xl my-6">Product Total:₹{totalprice}</h1>
         <div>
         <Popover placement="bottom">
           <PopoverHandler>
@@ -137,8 +137,8 @@ return(
         </div>
         </div>
         <div>
-        <button className=" bg-yellow-300 w-36 rounded-2xl 
-        mt-28 text-2xl hover:scale-105 duration-300"
+        <button className=" bg-yellow-300 w-96 rounded-2xl 
+        mt-28 text-2xl hover:scale-105 duration-300 h-16 "
         onClick={()=>displayRazorpay(totalprice)}>
             Checkout</button>
             </div>
