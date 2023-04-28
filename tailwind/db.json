@@ -48,6 +48,20 @@
       "category": "chicken",
       "image": "https://images.pexels.com/photos/8472749/pexels-photo-8472749.jpeg?auto=compress&cs=tinysrgb&w=1600",
       "price": 60
+    },
+    {
+      "id": 13,
+      "name": "Wings",
+      "category": "chicken",
+      "image": "https://images.pexels.com/photos/6947256/pexels-photo-6947256.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "price": 90
+    },
+    {
+      "id": 14,
+      "name": "Baked Chicken",
+      "category": "chicken",
+      "image": "https://images.pexels.com/photos/6947304/pexels-photo-6947304.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "price": 700
     }
   ],
   "orders": [
@@ -99,6 +113,34 @@
       "category": "salad",
       "image": "https://images.pexels.com/photos/1211887/pexels-photo-1211887.jpeg?auto=compress&cs=tinysrgb&w=1600",
       "price": 30
+    },
+    {
+      "id": 13,
+      "name": "Wings",
+      "category": "chicken",
+      "image": "https://images.pexels.com/photos/6947256/pexels-photo-6947256.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "price": 90
+    },
+    {
+      "id": 14,
+      "name": "Baked Chicken",
+      "category": "chicken",
+      "image": "https://images.pexels.com/photos/6947304/pexels-photo-6947304.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "price": 700
+    },
+    {
+      "id": 15,
+      "name": "Chicken Tenders",
+      "category": "chicken",
+      "image": "https://images.pexels.com/photos/8472749/pexels-photo-8472749.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "price": 60
+    },
+    {
+      "id": 16,
+      "name": "Chicken Kabob",
+      "category": "chicken",
+      "image": "https://images.pexels.com/photos/8472749/pexels-photo-8472749.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "price": 500
     }
   ],
   "address": [
