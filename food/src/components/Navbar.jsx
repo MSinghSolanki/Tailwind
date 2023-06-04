@@ -10,28 +10,54 @@ import { useState } from 'react';
 import logo1 from "./images/logo.png"
 import axios from "axios";
 import {Link} from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
+import { RegistrationForm } from "./register";
 
 
 export const Navbar=()=>{
 
+  const [count, setCount] = useState([]);
+  const [showPopup, setShowPopup] = useState(true); // State to control the visibility of the popup
+  const location = useLocation();
+    const { name, email } = location.state;
+
+
+    const closePopups = () => {
+      setShowPopup(false);
+    };
   
-const[count,setCount] =useState([])
+
+ 
 
 
 
- const counts = ()=>{
-  axios.get("http://localhost:8080/orders").then((res)=>{
-setCount(res.data.length)
+  const counts = () => {
+    axios.get("http://localhost:8080/orders").then((res) => {
+      setCount(res.data.length);
+    });
+  };
 
-  })
 
-}
-useEffect(()=>{
-counts();
 
-},[])
 
+  useEffect(() => {
+    counts();
+  }, []);
+
+  useEffect(() => {
+    // Check if it's the first load by checking if a specific key exists in localStorage
+    const isFirstLoad = localStorage.getItem("isFirstLoad") === null;
+
+    if (isFirstLoad) {
+      // Show the popup and set the flag in localStorage
+      setShowPopup(true);
+      localStorage.setItem("isFirstLoad", "false");
+    }
+  }, []);
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
 
     const [close,setClose] =useState(false)
 
@@ -67,6 +93,17 @@ counts();
    </div>
    <div>
   <h1 className="text-4xl font-bold"> Quality and <span className="text-orange-500 font-bold">Quantity</span></h1>
+ <div>
+  <RegistrationForm onClose={closePopups}></RegistrationForm>
+ </div>
+ <div>
+ <p className="text-black mr-4">Name - {name}</p>
+      <p className="text-black">Email - {email}</p>
+ </div>
+  <div>
+  {/* <p className="text-black mr-4">Name - {name}</p>
+      <p className="text-black">Email - {email}</p> */}
+  </div>
    </div>
    {/* Search Menu
    <div className='bg-gray-200 rounded-full items-center px-2 w-[200px]
