@@ -10,8 +10,8 @@ import { useState } from 'react';
 import logo1 from "./images/logo.png"
 import axios from "axios";
 import {Link} from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import { RegistrationForm } from "./register";
+import {DarkModeToggle } from "./icons/darlig";
 
 export const Navbar = () => {
   const [count, setCount] = useState([]);
@@ -19,6 +19,7 @@ export const Navbar = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
+  const [isDarkMode, setIsDarkMode] = useState(false);
   const counts = () => {
     axios.get("http://localhost:8080/orders").then((res) => {
       setCount(res.data.length);
@@ -29,9 +30,6 @@ export const Navbar = () => {
     counts();
   }, []);
 
-
-
-   
 
   useEffect(() => {
     if (localStorage.getItem("name") && localStorage.getItem("email")) {
@@ -60,6 +58,20 @@ export const Navbar = () => {
     localStorage.clear();
 };
 
+useEffect(() => {
+  localStorage.setItem("isDarkMode", isDarkMode);
+  applyTheme();
+}, [isDarkMode]);
+
+const applyTheme = () => {
+  const rootElement = document.documentElement;
+  if (isDarkMode) {
+    rootElement.classList.add("dark");
+  } else {
+    rootElement.classList.remove("dark");
+  }
+};
+
 
   return (
     <div className='flex max-w-[1980px] mx-auto justify-between 
@@ -78,6 +90,7 @@ export const Navbar = () => {
   
    </div>
    <div>
+   <DarkModeToggle></DarkModeToggle>
         <h1 className="text-4xl font-bold">
           Quality and <span className="text-orange-500 font-bold">Quantity</span>
         </h1>
@@ -109,6 +122,7 @@ export const Navbar = () => {
     <input className='bg-transparent p-2 focus:outline-none' type='text' placeholder='Search Food'/>
    </div> */}
    {/* {Cart button} */}
+
    <button className='bg-transparent hidden md:flex items-center py-2
    rounded-full w-20 hover:scale-105 duration-300  pr-4'>
 

@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+
+.dark {
+  /* Add your dark mode styles here */
+  background-color: #222;
+  color: #fff;
+}
