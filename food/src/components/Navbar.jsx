@@ -13,23 +13,11 @@ import {Link} from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { RegistrationForm } from "./register";
 
-
-export const Navbar=()=>{
-
+export const Navbar = () => {
   const [count, setCount] = useState([]);
-  const [showPopup, setShowPopup] = useState(true); // State to control the visibility of the popup
-  const location = useLocation();
-    const { name, email } = location.state;
-
-
-    const closePopups = () => {
-      setShowPopup(false);
-    };
-  
-
- 
-
-
+  const [showPopup, setShowPopup] = useState(true);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
 
   const counts = () => {
     axios.get("http://localhost:8080/orders").then((res) => {
@@ -37,42 +25,45 @@ export const Navbar=()=>{
     });
   };
 
-
-
-
   useEffect(() => {
     counts();
   }, []);
 
   useEffect(() => {
-    // Check if it's the first load by checking if a specific key exists in localStorage
     const isFirstLoad = localStorage.getItem("isFirstLoad") === null;
 
     if (isFirstLoad) {
-      // Show the popup and set the flag in localStorage
       setShowPopup(true);
       localStorage.setItem("isFirstLoad", "false");
     }
   }, []);
 
-  const closePopup = () => {
-    setShowPopup(false);
+  useEffect(() => {
+    if (localStorage.getItem("name") && localStorage.getItem("email")) {
+      setName(localStorage.getItem("name"));
+      setEmail(localStorage.getItem("email"));
+      setShowPopup(false);
+    }
+  }, []);
+
+  const [close, setClose] = useState(false);
+
+  const startScoll = () => {
+    setClose(false);
+    document.body.style.overflow = "unset";
   };
 
-    const [close,setClose] =useState(false)
+  const stopscroll = () => {
+    setClose(!close);
 
-    const startScoll=()=>{
-      setClose(false);
-
-      document.body.style.overflow='unset';
+    if (typeof window !== "undefined" && window.document) {
+      document.body.style.overflow = "hidden";
     }
-    const stopscroll=()=>{
-      setClose(!close);
+  };
 
-      if(typeof window !='undefined' &&window.document){
-        document.body.style.overflow='hidden';
-      }
-    }
+  window.onbeforeunload = function (e) {
+    localStorage.clear();
+};
 
 
   return (
@@ -92,19 +83,30 @@ export const Navbar=()=>{
   
    </div>
    <div>
-  <h1 className="text-4xl font-bold"> Quality and <span className="text-orange-500 font-bold">Quantity</span></h1>
- <div>
-  <RegistrationForm onClose={closePopups}></RegistrationForm>
- </div>
- <div>
- <p className="text-black mr-4">Name - {name}</p>
-      <p className="text-black">Email - {email}</p>
- </div>
-  <div>
-  {/* <p className="text-black mr-4">Name - {name}</p>
-      <p className="text-black">Email - {email}</p> */}
-  </div>
-   </div>
+        <h1 className="text-4xl font-bold">
+          Quality and <span className="text-orange-500 font-bold">Quantity</span>
+        </h1>
+        {name && email ? (
+          <div>
+            <p className="text-black mr-4">Name - {name}</p>
+            <p className="text-black">Email - {email}</p>
+          </div>
+        ) : (
+          <div>
+            {showPopup && (
+              <RegistrationForm
+                onSuccess={(name, email) => {
+                  setName(name);
+                  setEmail(email);
+                  localStorage.setItem("name", name);
+                  localStorage.setItem("email", email);
+                  setShowPopup(false);
+                }}
+              />
+            )}
+          </div>
+        )}
+      </div>
    {/* Search Menu
    <div className='bg-gray-200 rounded-full items-center px-2 w-[200px]
    sm:w-[400px] lg:w-[500px] flex hover:scale-105 duration-300'>
