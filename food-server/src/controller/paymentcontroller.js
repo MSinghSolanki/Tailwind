@@ -3,8 +3,6 @@ const Razorpay = require("razorpay")
 require("dotenv").config();
 
 
-
-
 const instance = new Razorpay({ 
    key_id:process.env.KEY_ID, 
    key_secret: process.env.KEY_SECRET 
@@ -27,27 +25,3 @@ res.status(200).json({
 
 
 module.exports = checkout;
-
-// const express = require("express")
-
-// const router = express.Router();
-
-// const Orders = require ("../models/ordermodel")
-
-// export const orderCreate=(req,res,next)=>{
-// try{
-
-//  const order =  Orders.create({
-//     Amount: req.body.Amount,
-//     Currency: req.body.Currency,
-//     Receipt: req.body.Receipt,
-// })
-// console.log(req.body)
-
-// }catch(err){
-
-
-// }
-
-
-// }

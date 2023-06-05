@@ -1,9 +1,10 @@
 const express = require("express")
 
  const router = express.Router();
-const checkout = require("../controller/paymentcontroller.js")
+const checkouts = require("../controller/paymentcontroller.js")
 
-router.route("/checkout").post(checkout);
+
+router.post("/create",checkouts)
 
 
 module.exports = router;
