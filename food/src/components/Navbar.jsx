@@ -29,14 +29,9 @@ export const Navbar = () => {
     counts();
   }, []);
 
-  useEffect(() => {
-    const isFirstLoad = localStorage.getItem("isFirstLoad") === null;
 
-    if (isFirstLoad) {
-      setShowPopup(true);
-      localStorage.setItem("isFirstLoad", "false");
-    }
-  }, []);
+
+   
 
   useEffect(() => {
     if (localStorage.getItem("name") && localStorage.getItem("email")) {

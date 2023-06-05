@@ -78,7 +78,7 @@ const[order,setOrder] = useState({
       </h1>
 
       {/* Filter row */}
-      <div className="flex flex-col lg:flex-row justify-between">
+      <div className="flex flex-col  justify-between">
         {/* Filter type */}
         <div>
           <p className="font-bold text-gray-700">Filter Type</p>
