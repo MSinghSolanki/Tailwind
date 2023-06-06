@@ -32,7 +32,8 @@ export const Orders=()=>{
        document.body.appendChild(script)
       })
        }
-     
+
+
      const displayRazorpay =async(price)=>{
        const res =await loadScript('https://checkout.razorpay.com/v1/checkout.js')
      

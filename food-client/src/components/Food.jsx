@@ -5,7 +5,11 @@ import { AiFillHeart } from "react-icons/ai";
 
 export const Food = () => {
 
+
+ 
+
   
+
 const[sortingMethod,setSortingMethod] =useState("none");
  
 const[fav,setFav] = useState({
@@ -70,8 +74,7 @@ const[order,setOrder] = useState({
     })
   }
 
- 
-
+  
   return (
     <div className="max-w-[1980px] m-auto px-4 py-12">
       <h1 className="text-red-600 font-bold text-4xl text-center">
