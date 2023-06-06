@@ -5,6 +5,7 @@ import { AiFillHeart } from "react-icons/ai";
 
 export const Food = () => {
 
+  
 const[sortingMethod,setSortingMethod] =useState("none");
  
 const[fav,setFav] = useState({

@@ -2,8 +2,9 @@ const express = require ("express");
 const connect = require ("./config/connect")
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({extended:true}))
 
-const paymentRoute = require("./Routes/paymentRouter")
+const paymentRoute = require("./controller/paymentcontroller")
 
 
 app.use("/api",paymentRoute)

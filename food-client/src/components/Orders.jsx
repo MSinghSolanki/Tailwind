@@ -36,26 +36,30 @@ export const Orders=()=>{
      const displayRazorpay =async(price)=>{
        const res =await loadScript('https://checkout.razorpay.com/v1/checkout.js')
      
+
        if(!res){
          alert("Your Payment failed")
          return
        }
 
-       const options ={
-        key: "rzp_test_8q6zwwQwJ27tKx",
-        currency:"INR",
-        totalprice: totalprice*100,
-        name:"Hungry and Beat",
-        description:"May your Hunger be Filled",
-        image:"./images/logo.png",
-
-       handler:function(response){
-        alert(response.razorpay_payment_id)
-        alert("payment Succesfully")
-       },
-       prefill:{
-        name:"Hunger and Beat"
-       }
+       const options = {
+        "key": "rzp_test_2zLoRmhGoenyic", // Enter the Key ID generated from the Dashboard
+        "amount": price, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+        "currency": "INR",
+        "name": "Acme Corp",
+        "description": "Test Transaction",
+        "image": "https://example.com/your_logo",
+        "order_id": "order_IluGWxBm9U8zJ8", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        "handler": function (response){
+            alert(response.razorpay_payment_id);
+            alert(response.razorpay_order_id);
+            alert(response.razorpay_signature)
+        },
+        "prefill": {
+            "name": "Hunger and Beats",
+            "email": "hungerandBeats@io.com",
+            "contact": "91234533455"
+        }
        };
        const paymentObject = new window.Razorpay(options)
        paymentObject.open()
