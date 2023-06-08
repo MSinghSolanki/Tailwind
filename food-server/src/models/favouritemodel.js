@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 
-const orderSchema = mongoose.Schema(
+const favouriteSchema = mongoose.Schema(
     {
      name: { type: String, required: true },
     price: { type: Number, required: true },
@@ -13,4 +13,4 @@ const orderSchema = mongoose.Schema(
       }
 )
 
-module.exports = mongoose.model("order",orderSchema)
+module.exports = mongoose.model("favourite",favouriteSchema)

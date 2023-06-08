@@ -4,26 +4,16 @@ import axios from "axios"
 import { AiFillHeart } from "react-icons/ai";
 
 export const Food = () => {
+  const [selectedImage, setSelectedImage] = useState(null);
 
-
- 
-
-  
-
+  const [formData, setFormData] = useState({
+    name: "",
+    price: "",
+   image:"",
+  });
 const[sortingMethod,setSortingMethod] =useState("none");
  
-const[fav,setFav] = useState({
-    name: "",
-    category: "",
-    image:"",
-    price: "",
-})
-const[order,setOrder] = useState({
-  name: "",
-  category: "",
-  image:"",
-  price: "",
-})
+
 
   const [foods, setFoods] = useState(data);
 
@@ -51,30 +41,53 @@ const[order,setOrder] = useState({
   }, [sortingMethod]);
 
 
-  let handlefavourite=(e)=>{
-    setFav({
-      name: "",
-      category: "",
-      image:"",
-      price: "",
-    })
-     axios.post("http://localhost:8080/favourite",e).then(()=>{
-      
-    })
-  }
-  let handleorder=(e)=>{
-    setOrder({
-      name: "",
-      category: "",
-      image:"",
-      price: "",
-    })
-     axios.post("http://localhost:8080/orders",e).then(()=>{
-      
-    })
-  }
-
+  const handlefavourite = (e) => {
+    const data = {
+      name: e.name,
+      price: e.price,
+       image:e.image,
+    };
+    console.log(e)
   
+    axios.post("http://localhost:2754/favourite/fav", data)
+      .then(() => {
+        setFormData({
+          name: "",
+          price: "",
+          image:null,
+        });
+        console.log(setFormData)
+        console.log(data.data)
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+
+  const handleOrderNow = (e) => {
+    const data = new FormData();
+    data.append("name", e.name);
+    data.append("price", e.price);
+    data.append("image", selectedImage);
+
+
+    // Make the POST request
+    axios
+      .post("http://localhost:2754/order/create", data)
+      .then(() => {
+        setFormData({
+          name: "",
+          price: "",
+         image:null,
+        });
+        console.log(setFormData);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+ 
   return (
     <div className="max-w-[1980px] m-auto px-4 py-12">
       <h1 className="text-red-600 font-bold text-4xl text-center">
@@ -139,10 +152,12 @@ const[order,setOrder] = useState({
             key={ei}
             className="boder shadow-lg rounded-lg hover:scale-105 duration-300"
           >
-            <img
-              src={e.image}
-              alt={e.name}
-              className="w-full h-[200px] object-cover rounded-t-lg"
+            <img   onClick={ (event) => {
+          console.log(event.target.files[0]);
+          setSelectedImage(event.target.files[0])
+            }}
+            name="image" src={e.image} alt={e.name} 
+            className="w-full h-[200px] object-cover rounded-t-lg"
             />
               <AiFillHeart size={40} onClick={()=>{
                
@@ -151,13 +166,11 @@ const[order,setOrder] = useState({
       
               className=" hover:text-red-600 cursor-pointer text-gray-200"/>
 
-<button onClick={()=>{
-  handleorder(e)
-}} className="bg-gray-400 text-white rounded-r-3xl w-32 h-11 hover:bg-black hover:text-white my-3" >Order Now</button>
+<button  onClick={()=>{handleOrderNow(e)}} className="bg-gray-400 text-white rounded-r-3xl w-32 h-11 hover:bg-black hover:text-white my-3" >Order Now</button>
             <div className="flex justify-between px-2 py-4">
-              <p className="font-bold">{e.name}</p>
+              <p name="name" className="font-bold">{e.name}</p>
              
-              <span className="bg-orange-500 text-white p-1 rounded-full">
+              <span name="price" className="bg-orange-500 text-white p-1 rounded-full">
                 {e.price}
               </span>
               

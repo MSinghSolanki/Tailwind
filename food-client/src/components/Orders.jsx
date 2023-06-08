@@ -79,7 +79,7 @@ let amount;
 
 
 
-    const Orders =()=>{  axios.get("http://localhost:8080/orders").then((res)=>{
+    const Orders =()=>{  axios.get("http://localhost:2754/order/create").then((res)=>{
         setOrs(res.data)
         let total=0;
         res.data.map((e)=>{
