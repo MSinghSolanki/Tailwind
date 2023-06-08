@@ -1,4 +1,4 @@
-const Order = require("../models/ordersmodel.js")
+const Favourite = require("../models/favouritemodel.js")
 const express = require("express")
 const router = express.Router();
 const dotenv = require('dotenv')
@@ -15,11 +15,11 @@ cloudinary.config({
 });
 
 
-router.post("/create",uploadSingle("image"),async(req, res) => {
+router.post("/fav",uploadSingle("image"),async(req, res) => {
    try{
 
       const result =await cloudinary.uploader.upload(req.file.path)
-   const order = await Order.create({
+   const order = await Favourite.create({
       name:req.body.name,
       price:req.body.price,
       image: result.url,
@@ -34,10 +34,10 @@ router.post("/create",uploadSingle("image"),async(req, res) => {
 
 
  })
-router.get("/create",async(req, res) => {
+router.get("/fav",async(req, res) => {
 
    try{
-   const orders = await Order.find().lean().exec()
+   const orders = await Favourite.find().lean().exec()
 
    
 
