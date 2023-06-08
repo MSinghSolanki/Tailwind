@@ -14,57 +14,68 @@ import { Link } from "react-router-dom";
 export const Orders=()=>{
     const [ors,setOrs] =useState([])
     const[totalprice,setTotalPrice] = useState(0)
+let amount;
 
 
-    const loadScript =(src)=>{
-      return new Promise((resolve)=>{
-       const script =document.createElement('script')
-       script.src=src
+
+
+   const checkoutHandler = async(amount)=>{
+      const {data}= await axios.post("http://localhost:2754/api/checkout",{
+      amount
+     } )
+     console.log(data)
+    }
+
+    // const loadScript =(src)=>{
+    //   return new Promise((resolve)=>{
+    //    const script =document.createElement('script')
+    //    script.src=src
      
-       script.onload = ()=>{
-         resolve(true)
-       }
+    //    script.onload = ()=>{
+    //      resolve(true)
+    //    }
      
-       script.onerror =()=>{
-         resolve(false)
-       }
+    //    script.onerror =()=>{
+    //      resolve(false)
+    //    }
      
-       document.body.appendChild(script)
-      })
-       }
-
-
-     const displayRazorpay =async(price)=>{
-       const res =await loadScript('https://checkout.razorpay.com/v1/checkout.js')
+    //    document.body.appendChild(script)
+    //   })
+    //    }
+     
+    //  const displayRazorpay =async(amount)=>{
+    //   const {data} = await axios.post("http://localhost:2754/api/orders",{
+    //     amount
+    //   })
      
 
-       if(!res){
-         alert("Your Payment failed")
-         return
-       }
+    //    if(!res){
+    //      alert("Your Payment failed")
+    //      return
+    //    }
 
-       const options = {
-        "key": "rzp_test_2zLoRmhGoenyic", // Enter the Key ID generated from the Dashboard
-        "amount": price, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-        "currency": "INR",
-        "name": "Acme Corp",
-        "description": "Test Transaction",
-        "image": "https://example.com/your_logo",
-        "order_id": "order_IluGWxBm9U8zJ8", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-        "handler": function (response){
-            alert(response.razorpay_payment_id);
-            alert(response.razorpay_order_id);
-            alert(response.razorpay_signature)
-        },
-        "prefill": {
-            "name": "Hunger and Beats",
-            "email": "hungerandBeats@io.com",
-            "contact": "91234533455"
-        }
-       };
-       const paymentObject = new window.Razorpay(options)
-       paymentObject.open()
-     }
+    //    const options = {
+    //     "key": "rzp_test_2zLoRmhGoenyic", // Enter the Key ID generated from the Dashboard
+    //     "amount": price, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    //     "currency": "INR",
+    //     "name": "Acme Corp",
+    //     "description": "Test Transaction",
+    //     "image": "https://example.com/your_logo",
+    //     "order_id": order_id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    //     "handler": function (response){
+    //         alert(response.razorpay_payment_id);
+    //         alert(response.razorpay_order_id);
+    //         alert(response.razorpay_signature)
+    //     },
+    //     "prefill": {
+    //         "name": "Hunger and Beats",
+    //         "email": "hungerandBeats@io.com",
+    //         "contact": "91234533455"
+    //     }
+    //    };
+    //    const paymentObject = new window.Razorpay(options)
+    //    paymentObject.open()
+    //  }
 
 
 
@@ -144,7 +155,7 @@ return(
         <div>
         <button className=" bg-yellow-300 w-96 rounded-2xl 
         mt-28 text-2xl hover:scale-105 duration-300 h-16 "
-        onClick={()=>displayRazorpay(totalprice)}>
+        onClick={()=>checkoutHandler(amount)}>
             Checkout</button>
             </div>
         </div>
