@@ -5,7 +5,7 @@ const dotenv = require('dotenv')
 require('dotenv').config()
 const { upload,uploadSingle } = require("../middleware/fileupload.js");
 
-const cloudinary = require("cloudinary").v2;
+ const cloudinary = require("cloudinary").v2;
 
 
 cloudinary.config({ 
@@ -22,9 +22,9 @@ router.post("/create",uploadSingle("image"),async(req, res) => {
    const order = await Order.create({
       name:req.body.name,
       price:req.body.price,
-      image: result.url,
+       image: result.url,
    })
-
+ console.log(result)
 
    return res.status(200).send(order)
    } catch(err){

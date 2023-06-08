@@ -9,16 +9,11 @@ export const Food = () => {
   const [formData, setFormData] = useState({
     name: "",
     price: "",
-    image:"",
+   image:"",
   });
 const[sortingMethod,setSortingMethod] =useState("none");
  
-const[fav,setFav] = useState({
-    name: "",
-    category: "",
-    image:"",
-    price: "",
-})
+
 
   const [foods, setFoods] = useState(data);
 
@@ -46,47 +41,53 @@ const[fav,setFav] = useState({
   }, [sortingMethod]);
 
 
-  const handlefavourite = () => {
-    const data = new FormData();
-    data.append("name", formData.name);
-    data.append("price", formData.price);
-    data.append("image", formData.image); // Append the selected image file
-    axios.post("http://localhost:2756/order/fav", data)
-      .then(() => {
-        setFormData({
-          name: "",
-          price: "",
-          image:"",
-        });
-        console.log(setFormData)
-        console.log(data.data)
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-  };
-
-  const handlesubmitFinal = () => {
-    const data = new FormData();
-    data.append("name", formData.name);
-    data.append("price", formData.price);
-    data.append("image", formData.image); // Append the selected image file
-    axios.post("http://localhost:2756/order/create", data)
-      .then(() => {
-        setFormData({
-          name: "",
-          price: "",
-          image:"",
-        });
-        console.log(setFormData)
-        console.log(data.data)
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-  };
-
+  const handlefavourite = (e) => {
+    const data = {
+      name: e.name,
+      price: e.price,
+       image:e.image,
+    };
+    console.log(e)
   
+    axios.post("http://localhost:2754/favourite/fav", data)
+      .then(() => {
+        setFormData({
+          name: "",
+          price: "",
+          image:null,
+        });
+        console.log(setFormData)
+        console.log(data.data)
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+
+  const handleOrderNow = (e) => {
+    const data = new FormData();
+    data.append("name", e.name);
+    data.append("price", e.price);
+    data.append("image", selectedImage);
+
+
+    // Make the POST request
+    axios
+      .post("http://localhost:2754/order/create", data)
+      .then(() => {
+        setFormData({
+          name: "",
+          price: "",
+         image:null,
+        });
+        console.log(setFormData);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  };
+ 
   return (
     <div className="max-w-[1980px] m-auto px-4 py-12">
       <h1 className="text-red-600 font-bold text-4xl text-center">
@@ -151,7 +152,11 @@ const[fav,setFav] = useState({
             key={ei}
             className="boder shadow-lg rounded-lg hover:scale-105 duration-300"
           >
-            <img name="image" src={e.image} alt={e.name} 
+            <img   onClick={ (event) => {
+          console.log(event.target.files[0]);
+          setSelectedImage(event.target.files[0])
+            }}
+            name="image" src={e.image} alt={e.name} 
             className="w-full h-[200px] object-cover rounded-t-lg"
             />
               <AiFillHeart size={40} onClick={()=>{
@@ -161,7 +166,7 @@ const[fav,setFav] = useState({
       
               className=" hover:text-red-600 cursor-pointer text-gray-200"/>
 
-<button onClick={()=>{{handlesubmitFinal}}} className="bg-gray-400 text-white rounded-r-3xl w-32 h-11 hover:bg-black hover:text-white my-3" >Order Now</button>
+<button  onClick={()=>{handleOrderNow(e)}} className="bg-gray-400 text-white rounded-r-3xl w-32 h-11 hover:bg-black hover:text-white my-3" >Order Now</button>
             <div className="flex justify-between px-2 py-4">
               <p name="name" className="font-bold">{e.name}</p>
              

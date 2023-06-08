@@ -20,11 +20,11 @@ app.use("/favourite",favRoute)
 
 
 
-app.listen(2800, async () => {
+app.listen(2754, async () => {
     try {
         
       await connect();
-console.log("Listening to 2800")
+console.log("Listening to 2754")
     } catch (err) {
       console.error(err.message);
     }
