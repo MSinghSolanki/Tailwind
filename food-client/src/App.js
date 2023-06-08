@@ -11,6 +11,7 @@ import { PaymentGateway } from "./components/paymentgateway";
 import { Favourite} from "./components/favourite";
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./components/home";
+import { Success } from "./components/paymentsuccess";
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
         <Route path="orders" element={<Orders/>}/>
         <Route path="invite" element={<Invite/>}/>
         <Route path="favourite" element={<Favourite/>}/>
+        <Route path="paymentsuccess" element={<Success/>}/>
+        
       </Routes>
     
        <footer className="bg-black text-center  text-white right-0 left-0 relative">

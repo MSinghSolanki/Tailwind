@@ -19,82 +19,56 @@ let amount;
 
 
 
-   const checkoutHandler = async(amount)=>{
-      const {data}= await axios.post("http://localhost:2754/api/checkout",{
-      amount
-     } )
-     console.log(data)
+const checkoutHandler = async () => {
+
+    const { data:{order} } = await axios.post("http://localhost:2754/api/checkout", {
+      amount: totalprice, 
+})
+  var options = {
+    key: "rzp_test_2zLoRmhGoenyic", // Enter the Key ID generated from the Dashboard
+    amount: order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    currency: "INR",
+    name: "Hunger & Beats", //your business name
+    description: "Test Transaction",
+    image: "https://example.com/your_logo",
+    order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    callback_url: "http://localhost:2754/api/payment",
+    prefill: { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
+        name: "Mohit Singh Solanki", //your customer's name
+        email: "Mohitsinghsolanki8@gmail.com",
+        contact: "4141414414114" //Provide the customer's phone number for better conversion rates 
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
     }
+};
+const razor = window.Razorpay(options);
 
-    // const loadScript =(src)=>{
-    //   return new Promise((resolve)=>{
-    //    const script =document.createElement('script')
-    //    script.src=src
-     
-    //    script.onload = ()=>{
-    //      resolve(true)
-    //    }
-     
-    //    script.onerror =()=>{
-    //      resolve(false)
-    //    }
-     
-    //    document.body.appendChild(script)
-    //   })
-    //    }
-     
-    //  const displayRazorpay =async(amount)=>{
-    //   const {data} = await axios.post("http://localhost:2754/api/orders",{
-    //     amount
-    //   })
-     
+    razor.open();
+  
+}
 
-    //    if(!res){
-    //      alert("Your Payment failed")
-    //      return
-    //    }
-
-    //    const options = {
-    //     "key": "rzp_test_2zLoRmhGoenyic", // Enter the Key ID generated from the Dashboard
-    //     "amount": price, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    //     "currency": "INR",
-    //     "name": "Acme Corp",
-    //     "description": "Test Transaction",
-    //     "image": "https://example.com/your_logo",
-    //     "order_id": order_id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    //     "handler": function (response){
-    //         alert(response.razorpay_payment_id);
-    //         alert(response.razorpay_order_id);
-    //         alert(response.razorpay_signature)
-    //     },
-    //     "prefill": {
-    //         "name": "Hunger and Beats",
-    //         "email": "hungerandBeats@io.com",
-    //         "contact": "91234533455"
-    //     }
-    //    };
-    //    const paymentObject = new window.Razorpay(options)
-    //    paymentObject.open()
-    //  }
-
-
-
-    const Orders =()=>{  axios.get("http://localhost:2754/order/create").then((res)=>{
-        setOrs(res.data)
+    
+    
+    const Orders =()=>{  axios.get("http://localhost:2754/order/create").then((data)=>{
+        setOrs(data.data.orders)
         let total=0;
-        res.data.map((e)=>{
+        data.data.orders.map((e)=>{
           total=total+e.price;
         });
         setTotalPrice(total);
-       
     });
+  
     };
 useEffect(()=>{
     Orders();
 },[])
 
 return(
-    <div>
+  <div>
       <PaymentGateway/>
     
     <div>
@@ -113,8 +87,8 @@ return(
   <div className="">
         {ors.map((e, ei) => (
           <div
-            key={ei}
-            className="flex max-w-md max-h-52 shadow-2xl bg-slate-100" >
+          key={ei}
+          className="flex max-w-md max-h-52 shadow-2xl bg-slate-100" >
             <img
               src={e.image}
               alt={e.name}
@@ -155,7 +129,7 @@ return(
         <div>
         <button className=" bg-yellow-300 w-96 rounded-2xl 
         mt-28 text-2xl hover:scale-105 duration-300 h-16 "
-        onClick={()=>checkoutHandler(amount)}>
+        onClick={()=>checkoutHandler()}>
             Checkout</button>
             </div>
         </div>
@@ -166,7 +140,5 @@ return(
     </div>
 )
 
+        }
 
-
-
-}

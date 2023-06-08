@@ -9,7 +9,7 @@ export const Food = () => {
   const [formData, setFormData] = useState({
     name: "",
     price: "",
-   image:"",
+ image:"",
   });
 const[sortingMethod,setSortingMethod] =useState("none");
  
@@ -45,7 +45,7 @@ const[sortingMethod,setSortingMethod] =useState("none");
     const data = {
       name: e.name,
       price: e.price,
-       image:e.image,
+      // image:e.image,
     };
     console.log(e)
   
@@ -54,7 +54,7 @@ const[sortingMethod,setSortingMethod] =useState("none");
         setFormData({
           name: "",
           price: "",
-          image:null,
+        //  image:null,
         });
         console.log(setFormData)
         console.log(data.data)
@@ -68,7 +68,7 @@ const[sortingMethod,setSortingMethod] =useState("none");
     const data = new FormData();
     data.append("name", e.name);
     data.append("price", e.price);
-    data.append("image", selectedImage);
+  data.append("image", selectedImage);
 
 
     // Make the POST request
@@ -78,7 +78,7 @@ const[sortingMethod,setSortingMethod] =useState("none");
         setFormData({
           name: "",
           price: "",
-         image:null,
+      image:null,
         });
         console.log(setFormData);
         console.log(data);
@@ -152,10 +152,8 @@ const[sortingMethod,setSortingMethod] =useState("none");
             key={ei}
             className="boder shadow-lg rounded-lg hover:scale-105 duration-300"
           >
-            <img   onClick={ (event) => {
-          console.log(event.target.files[0]);
-          setSelectedImage(event.target.files[0])
-            }}
+            <img 
+        
             name="image" src={e.image} alt={e.name} 
             className="w-full h-[200px] object-cover rounded-t-lg"
             />

@@ -15,7 +15,7 @@ const favRoute = require("./controller/Favouritecontroller.js")
 
 app.use("/order",orderRoute)
 app.use("/favourite",favRoute)
-// app.use("/api",paymentRoute)
+app.use("/api",paymentRoute)
 
 
 
