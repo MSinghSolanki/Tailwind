@@ -10,7 +10,7 @@ export const Cards =() =>{
                 <div className="absolute w-full h-full bg-black/40 rounded-xl text-white">
                     <p className="font-bold text-2xl px-2 pt-4">Sun's Out,BDGO's Out</p>
                     <p className="px-2">through B/26</p>
-                    <button className="rounded-full border-white bg-white text-black mx-2  align-bottom">Order Now</button>
+                    {/* <button className="rounded-full border-white bg-white text-black mx-2  align-bottom">Order Now</button> */}
                 </div>
                 <img className="max-h-[160px] md:max-h-[200px] w-full object-cover" src="https://images.pexels.com/photos/1600711/pexels-photo-1600711.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="/"/>
             </div>
@@ -20,7 +20,7 @@ export const Cards =() =>{
                 <div className="absolute w-full h-full bg-black/40 rounded-xl text-white">
                     <p className="font-bold text-2xl px-2 pt-4">Sun's Out,BDGO's Out</p>
                     <p className="px-2">through B/26</p>
-                    <button className="rounded-full  bg-white text-black mx-2 align-bottom ">Order Now</button>
+                    {/* <button className="rounded-full  bg-white text-black mx-2 align-bottom ">Order Now</button> */}
                 </div>
                 <img className="max-h-[160px] md:max-h-[200px] w-full object-cover" src="https://images.pexels.com/photos/750073/pexels-photo-750073.jpeg?auto=compress&cs=tinysrgb&w=600" alt="/"/>
             </div>
@@ -30,7 +30,7 @@ export const Cards =() =>{
                 <div className="absolute w-full h-full bg-black/40 rounded-xl text-white">
                     <p className="font-bold text-2xl px-2 pt-4">Sun's Out,BDGO's Out</p>
                     <p className="px-2">through B/26</p>
-                    <button className="rounded-full border-white bg-white text-black mx-2  align-bottom">Order Now</button>
+                    {/* <button className="rounded-full border-white bg-white text-black mx-2  align-bottom">Order Now</button> */}
                 </div>
                 <img className="max-h-[160px] md:max-h-[200px] w-full object-cover" src="https://images.pexels.com/photos/5083910/pexels-photo-5083910.jpeg?auto=compress&cs=tinysrgb&w=600" alt="/"/>
             </div>
@@ -40,7 +40,7 @@ export const Cards =() =>{
                 <div className="absolute w-full h-full bg-black/40 rounded-xl text-white">
                     <p className="font-bold text-2xl px-2 pt-4">Sun's Out,BDGO's Out</p>
                     <p className="px-2">through B/26</p>
-                    <button className="rounded-full border-white bg-white text-black mx-2  align-bottom">Order Now</button>
+                    {/* <button className="rounded-full border-white bg-white text-black mx-2  align-bottom">Order Now</button> */}
                 </div>
                 <img className="max-h-[160px] md:max-h-[200px] w-full object-cover" src="https://images.pexels.com/photos/5836769/pexels-photo-5836769.jpeg?auto=compress&cs=tinysrgb&w=600" alt="/"/>
             </div>
@@ -50,7 +50,7 @@ export const Cards =() =>{
                 <div className="absolute w-full h-full bg-black/40 rounded-xl text-white">
                     <p className="font-bold text-2xl px-2 pt-4">Sun's Out,BDGO's Out</p>
                     <p className="px-2">through B/26</p>
-                    <button className="rounded-full border-white bg-white text-black mx-2  align-bottom">Order Now</button>
+                    {/* <button className="rounded-full border-white bg-white text-black mx-2  align-bottom">Order Now</button> */}
                 </div>
                 <img className="max-h-[160px] md:max-h-[200px] w-full object-cover" src="https://images.pexels.com/photos/6343168/pexels-photo-6343168.jpeg?auto=compress&cs=tinysrgb&w=600" alt="/"/>
             </div>
@@ -60,7 +60,7 @@ export const Cards =() =>{
                 <div className="absolute w-full h-full bg-black/40 rounded-xl text-white">
                     <p className="font-bold text-2xl px-2 pt-4">Sun's Out,BDGO's Out</p>
                     <p className="px-2">through B/26</p>
-                    <button className="rounded-full border-white bg-white text-black mx-2  align-bottom">Order Now</button>
+                    {/* <button className="rounded-full border-white bg-white text-black mx-2  align-bottom">Order Now</button> */}
                 </div>
                 <img className="max-h-[160px] md:max-h-[200px] w-full object-cover" src="https://images.pexels.com/photos/6660065/pexels-photo-6660065.jpeg?auto=compress&cs=tinysrgb&w=600" alt="/"/>
             </div>

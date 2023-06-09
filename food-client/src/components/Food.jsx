@@ -2,6 +2,22 @@ import { data } from "../Data/data.js";
 import { useEffect, useState } from "react";
 import axios from "axios"
 import { AiFillHeart } from "react-icons/ai";
+import foodImage1 from "../components/images/DoubleCheeseburger.jpg"
+import foodImage2 from "../components/images/Bacon Cheeseburger.jpg"
+import foodImage3 from "../components/images/Mushroom Burger.jpg"
+import foodImage4 from "../components/images/Loaded Burger.jpg"
+import foodImage5 from "../components/images/Feta & Spinnach.jpg"
+import foodImage6 from "../components/images/Meat Lovers.jpg"
+import foodImage7 from "../components/images/Cheese Pizza.jpg"
+import foodImage8 from "../components/images/Supreme Pizza.jpg"
+import foodImage9 from "../components/images/Kale Salad.jpg"
+import foodImage10 from "../components/images/Ceasar Salad.jpg"
+import foodImage11 from "../components/images/Loaded Salad.jpg"
+import foodImage12 from "../components/images/Fruit Salad.jpg"
+import foodImage13 from "../components/images/Paneer Tikka.jpg"
+import foodImage14 from "../components/images/Matar Paneer.jpg"
+import foodImage15 from "../components/images/Sahi Paneer.jpg"
+import foodImage16 from "../components/images/Malai Paneer.jpg"
 
 export const Food = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -68,9 +84,9 @@ const[sortingMethod,setSortingMethod] =useState("none");
     const data = new FormData();
     data.append("name", e.name);
     data.append("price", e.price);
-    data.append("image", selectedImage);
+    data.append("image", e.image);
 
-
+console.log(e)
     // Make the POST request
     axios
       .post("http://localhost:2754/order/create", data)
@@ -78,7 +94,7 @@ const[sortingMethod,setSortingMethod] =useState("none");
         setFormData({
           name: "",
           price: "",
-         image:null,
+         image:"",
         });
         console.log(setFormData);
         console.log(data);
@@ -125,10 +141,10 @@ const[sortingMethod,setSortingMethod] =useState("none");
               Salads
             </button>
             <button
-              onClick={() => filtertype("chicken")}
+              onClick={() => filtertype("paneer")}
               className=" m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
             >
-              Chicken
+              Paneer
             </button>
           </div>
         </div>
@@ -152,13 +168,46 @@ const[sortingMethod,setSortingMethod] =useState("none");
             key={ei}
             className="boder shadow-lg rounded-lg hover:scale-105 duration-300"
           >
-            <img   onClick={ (event) => {
-          console.log(event.target.files);
-          setSelectedImage(event.target.files)
-            }}
-            name="image" src={e.image} alt={e.name} 
-            className="w-full h-[200px] object-cover rounded-t-lg"
-            />
+   <img
+  name="image"
+  src={
+    e.name === "Double Cheeseburger"
+      ? foodImage1
+      : e.name === "Bacon Cheeseburger"
+      ? foodImage2
+      : e.name === "Mushroom Burger"
+      ? foodImage3
+      : e.name === "Loaded Burger"
+      ? foodImage4
+      : e.name === "Feta & Spinnach"
+      ? foodImage5
+      : e.name === "Supreme Pizza"
+      ? foodImage6
+      : e.name === "Meat Lovers"
+      ? foodImage7
+      : e.name === "Cheese Pizza"
+      ? foodImage8
+      : e.name === "Kale Salad"
+      ? foodImage9
+      : e.name === "Ceasar Salad"
+      ? foodImage10
+      : e.name === "Loaded Salad"
+      ? foodImage11
+      : e.name === "Fruit Salad"
+      ? foodImage12
+      : e.name === "Paneer Tikka"
+      ? foodImage13
+      : e.name === "Matar Paneer"
+      ? foodImage14
+      : e.name === "Sahi Paneer"
+      ? foodImage15
+      : e.name === "Malai Paneer"
+      ? foodImage16
+      : null // Default image if no matching condition
+  }
+  alt={e.name}
+  className="w-full h-[200px] object-cover rounded-t-lg"
+/>
               <AiFillHeart size={40} onClick={()=>{
                
                 handlefavourite(e)

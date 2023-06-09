@@ -97,34 +97,34 @@ export const data = [
   },
   {
     id: 13,
-    name: "Wings",
-    category: "chicken",
+    name: "Paneer Tikka",
+    category: "paneer",
     image:
-      "https://images.pexels.com/photos/6947256/pexels-photo-6947256.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "https://images.pexels.com/photos/9609835/pexels-photo-9609835.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 90,
   },
   {
     id: 14,
-    name: "Baked Chicken",
-    category: "chicken",
+    name: "Matar Paneer",
+    category: "paneer",
     image:
-      "https://images.pexels.com/photos/6947304/pexels-photo-6947304.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "https://images.pexels.com/photos/9609842/pexels-photo-9609842.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 700,
   },
   {
     id: 15,
-    name: "Chicken Tenders",
-    category: "chicken",
+    name: "Sahi Paneer",
+    category: "paneer",
     image:
-      "https://images.pexels.com/photos/8472749/pexels-photo-8472749.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "https://images.pexels.com/photos/9609835/pexels-photo-9609835.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 60,
   },
   {
     id: 16,
-    name: "Chicken Kabob",
-    category: "chicken",
+    name: "Malai Paneer",
+    category: "paneer",
     image:
-      "https://images.pexels.com/photos/8472749/pexels-photo-8472749.jpeg?auto=compress&cs=tinysrgb&w=1600",
+      "https://images.pexels.com/photos/10345736/pexels-photo-10345736.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     price: 500,
   },
 ];
