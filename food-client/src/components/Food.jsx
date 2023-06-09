@@ -4,7 +4,7 @@ import axios from "axios"
 import { AiFillHeart } from "react-icons/ai";
 
 export const Food = () => {
-  const [selectedImage, setSelectedImage] = useState(null);
+  
 
   const [formData, setFormData] = useState({
     name: "",
@@ -64,13 +64,13 @@ const[sortingMethod,setSortingMethod] =useState("none");
       });
   };
 
-  const handleOrderNow = (e) => {
+  const handleOrderNow = (name, price, image) => {
     const data = new FormData();
-    data.append("name", e.name);
-    data.append("price", e.price);
-  data.append("image", selectedImage);
+    data.append("name", name);
+    data.append("price", price);
+    data.append("image", image);
 
-
+console.log(e.target.getAttribute("src"))
     // Make the POST request
     axios
       .post("http://localhost:2754/order/create", data)
@@ -153,7 +153,6 @@ const[sortingMethod,setSortingMethod] =useState("none");
             className="boder shadow-lg rounded-lg hover:scale-105 duration-300"
           >
             <img 
-        
             name="image" src={e.image} alt={e.name} 
             className="w-full h-[200px] object-cover rounded-t-lg"
             />
@@ -164,7 +163,7 @@ const[sortingMethod,setSortingMethod] =useState("none");
       
               className=" hover:text-red-600 cursor-pointer text-gray-200"/>
 
-<button  onClick={()=>{handleOrderNow(e)}} className="bg-gray-400 text-white rounded-r-3xl w-32 h-11 hover:bg-black hover:text-white my-3" >Order Now</button>
+<button  onClick={()=>handleOrderNow(e.name, e.price, e.image)} className="bg-gray-400 text-white rounded-r-3xl w-32 h-11 hover:bg-black hover:text-white my-3" >Order Now</button>
             <div className="flex justify-between px-2 py-4">
               <p name="name" className="font-bold">{e.name}</p>
              

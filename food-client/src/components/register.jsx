@@ -23,15 +23,15 @@ export const RegistrationForm = ({ onSuccess }) => {
       </div>
       <Address invisible={modal} onClose={() => showModal(false)}>
         <form onSubmit={handleSubmit}>
-          <div className="flex">
+          <div className="flex bg-slate-100 h-18 ">
             <label>
               Name:
-              <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
+              <input className="text-2xl " type="text" value={name} onChange={(e) => setName(e.target.value)} />
             </label>
             <br />
             <label>
               Email:
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input className="text-2xl" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
             </label>
           </div>
           <br />

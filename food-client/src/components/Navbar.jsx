@@ -90,7 +90,7 @@ const applyTheme = () => {
   
    </div>
    <div>
-   <DarkModeToggle></DarkModeToggle>
+ 
         <h1 className="text-4xl font-bold">
           Quality and <span className="text-orange-500 font-bold">Quantity</span>
         </h1>
@@ -102,7 +102,7 @@ const applyTheme = () => {
         ) : (
           <div>
             {showPopup && (
-              <RegistrationForm
+              <RegistrationForm className=""
                 onSuccess={(name, email) => {
                   setName(name);
                   setEmail(email);

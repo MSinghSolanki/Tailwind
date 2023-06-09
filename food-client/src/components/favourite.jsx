@@ -6,7 +6,7 @@ export const Favourite= ()=>{
 const[favss,setFavss] =useState([])
 
 
-const favour =()=>{  axios.get("http://localhost:8080/favourite").then((data)=>{
+const favour =()=>{  axios.get("http://localhost:2754/favourite/fav").then((data)=>{
     setFavss(data.data)
 })
 };
