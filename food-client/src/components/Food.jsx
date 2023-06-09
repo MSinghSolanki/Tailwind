@@ -4,12 +4,12 @@ import axios from "axios"
 import { AiFillHeart } from "react-icons/ai";
 
 export const Food = () => {
-  
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const [formData, setFormData] = useState({
     name: "",
     price: "",
- image:"",
+   image:"",
   });
 const[sortingMethod,setSortingMethod] =useState("none");
  
@@ -45,7 +45,7 @@ const[sortingMethod,setSortingMethod] =useState("none");
     const data = {
       name: e.name,
       price: e.price,
-      // image:e.image,
+       image:e.image,
     };
     console.log(e)
   
@@ -54,7 +54,7 @@ const[sortingMethod,setSortingMethod] =useState("none");
         setFormData({
           name: "",
           price: "",
-        //  image:null,
+          image:null,
         });
         console.log(setFormData)
         console.log(data.data)
@@ -64,13 +64,13 @@ const[sortingMethod,setSortingMethod] =useState("none");
       });
   };
 
-  const handleOrderNow = (name, price, image) => {
+  const handleOrderNow = (e) => {
     const data = new FormData();
-    data.append("name", name);
-    data.append("price", price);
-    data.append("image", image);
+    data.append("name", e.name);
+    data.append("price", e.price);
+    data.append("image", selectedImage);
 
-console.log(e.target.getAttribute("src"))
+
     // Make the POST request
     axios
       .post("http://localhost:2754/order/create", data)
@@ -78,7 +78,7 @@ console.log(e.target.getAttribute("src"))
         setFormData({
           name: "",
           price: "",
-      image:null,
+         image:null,
         });
         console.log(setFormData);
         console.log(data);
@@ -152,7 +152,10 @@ console.log(e.target.getAttribute("src"))
             key={ei}
             className="boder shadow-lg rounded-lg hover:scale-105 duration-300"
           >
-            <img 
+            <img   onClick={ (event) => {
+          console.log(event.target.files);
+          setSelectedImage(event.target.files)
+            }}
             name="image" src={e.image} alt={e.name} 
             className="w-full h-[200px] object-cover rounded-t-lg"
             />
@@ -163,7 +166,7 @@ console.log(e.target.getAttribute("src"))
       
               className=" hover:text-red-600 cursor-pointer text-gray-200"/>
 
-<button  onClick={()=>handleOrderNow(e.name, e.price, e.image)} className="bg-gray-400 text-white rounded-r-3xl w-32 h-11 hover:bg-black hover:text-white my-3" >Order Now</button>
+<button  onClick={()=>{handleOrderNow(e)}} className="bg-gray-400 text-white rounded-r-3xl w-32 h-11 hover:bg-black hover:text-white my-3" >Order Now</button>
             <div className="flex justify-between px-2 py-4">
               <p name="name" className="font-bold">{e.name}</p>
              
