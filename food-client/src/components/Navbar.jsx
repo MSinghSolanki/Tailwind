@@ -21,7 +21,7 @@ export const Navbar = () => {
 
   const [isDarkMode, setIsDarkMode] = useState(false);
   const counts = () => {
-    axios.get("http://localhost:8080/orders").then((res) => {
+    axios.get("http://localhost:2754/item/store").then((res) => {
       setCount(res.data.length);
     });
   };
@@ -126,7 +126,7 @@ const applyTheme = () => {
    <button className='bg-transparent hidden md:flex items-center py-2
    rounded-full w-20 hover:scale-105 duration-300  pr-4'>
 
-<Link to="/orders" className="flex"><BsFillCartFill size={30} className/><span className=" bg-orange-300 text-white w-3 h-6 mb-5 rounded-full">{count}</span></Link>
+<Link to="/orders" className="flex"><TbTruckDelivery size={60} className/><span className=" bg-orange-300 text-white w-3 h-6 mb-5 rounded-full">{count}</span></Link>
    </button>
  
    

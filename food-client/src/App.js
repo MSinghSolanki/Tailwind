@@ -7,11 +7,11 @@ import { Category } from "./components/categories";
 import { Wallet } from "./components/Wallet";
 import { Invite } from "./components/invite";
 import { Orders } from "./components/Orders";
-import { PaymentGateway } from "./components/paymentgateway";
 import { Favourite} from "./components/favourite";
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./components/home";
 import { Success } from "./components/paymentsuccess";
+import { Footer } from "./components/footer";
 
 function App() {
   return (
@@ -28,9 +28,7 @@ function App() {
         
       </Routes>
     
-       <footer className="bg-black text-center  text-white right-0 left-0 relative">
-        <h1>©2023 Hunger and Beat,Inc.All rights reserved. </h1>
-      </footer>
+       <Footer/>
     </div>
   );
 }

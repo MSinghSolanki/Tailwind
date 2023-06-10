@@ -66,55 +66,62 @@ export const Orders = () => {
             <h1 className="text-4xl font-bold">Your Shopping Cart</h1>
           </div>
           <div>
-            <h1 className="text-red-500 my-3">
+            <h1 className="text-red-500 my-3 text-2xl hover:underline">
               <Link to="/">Continue Shopping</Link>
             </h1>
           </div>
         </div>
-        <div className="pt-28 flex justify-around">
-          <div className="">
+        <div className="pt-28 flex flex-col lg:flex-row justify-around">
+          <div className="flex flex-col justify-center">
             {orders.map((order, index) => (
-              <div key={index} className="flex max-w-md max-h-52 shadow-2xl bg-slate-100">
-                <img src={order.image} alt={order.name} className="w-32 h-32 object-cover rounded-t-lg" />
-                <div className="flex">
-                  <div>
-                    <p className="font-bold pl-4 pt-14 text-3xl">{order.name}</p>
-                  </div>
-                  <div className="flex flex-col-reverse">
-                    <p className="ml-10">{order.price}</p>
+              <div
+                key={index}
+                className="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white"
+              >
+                <div className="w-full md:w-1/3 bg-white grid place-items-center">
+                  <img src={order.image} alt={order.name} className="rounded-xl" />
+                </div>
+                <div className="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3">
+                  <div className="flex justify-between item-center">
+                    <p className="font-black text-gray-800 md:text-3xl text-xl">{order.name}</p>
+                    <p className="text-xl font-black text-gray-800">₹{order.price}</p>
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          <div>
-            <div>
-              <h1 className="text-5xl font-bold ">Order Summary</h1>
-            </div>
-            <div className="bg-gray-100 mt-24 shadow-2xl rounded-2xl h-40">
-              <h1 className="h-10 font-bold text-2xl my-6">Product Total: ₹{totalPrice}</h1>
-              <div>
-                <Popover placement="bottom">
-                  <PopoverHandler>
-                    <Button variant="gradient" className="text-2xl font-bond text-black">
-                      Have a Coupon?
-                    </Button>
-                  </PopoverHandler>
-                  <PopoverContent>
-                    <input type="text" placeholder="Enter the Coupon" />
-                  </PopoverContent>
-                </Popover>
-              </div>
-            </div>
-            <div>
-              <button
-                className="bg-yellow-300 w-96 rounded-2xl mt-28 text-2xl hover:scale-105 duration-300 h-16"
-                onClick={checkoutHandler}
-              >
-                Checkout
-              </button>
-            </div>
-          </div>
+          <div className=" flex-col justify-center items-center lg:flex-row lg:justify-between lg:items-start">
+  <div className="w-full lg:w-2/3 bg-gray-100 shadow-2xl rounded-2xl py-6 px-8">
+    <h1 className="text-4xl font-bold mb-6">Order Summary</h1>
+    <div className="flex flex-col space-y-4">
+      <div className="flex justify-between items-center">
+        <p className="text-xl">Product Total:</p>
+        <p className="text-2xl font-bold">₹{totalPrice}</p>
+      </div>
+      <div className="flex justify-between items-center">
+        <p className="text-xl">Tax:</p>
+        <p className="text-2xl font-bold">₹</p>
+      </div>
+      <div className="flex justify-between items-center">
+        <p className="text-xl">Discount:</p>
+        <p className="text-2xl font-bold">- ₹</p>
+      </div>
+      <div className="flex justify-between items-center">
+        <p className="text-xl">Total Amount:</p>
+        <p className="text-2xl font-bold">₹{totalPrice}</p>
+      </div>
+    </div>
+  </div>
+  <div className="w-full lg:w-1/3 mt-8 lg:mt-0">
+    <button
+      className="bg-yellow-300 w-full rounded-2xl text-2xl py-4 hover:scale-105 duration-300 lg:w-56"
+      onClick={checkoutHandler}
+    >
+      Checkout
+    </button>
+  </div>
+</div>
+
         </div>
       </div>
     </div>
