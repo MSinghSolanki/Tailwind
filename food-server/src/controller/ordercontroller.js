@@ -1,39 +1,25 @@
 const Order = require("../models/ordersmodel.js")
 const express = require("express")
 const router = express.Router();
-const dotenv = require('dotenv')
-require('dotenv').config()
-const { upload,uploadSingle } = require("../middleware/fileupload.js");
-
-const cloudinary = require("cloudinary").v2;
 
 
-cloudinary.config({ 
-  cloud_name: 'ddapx8jzk', 
-  api_key: process.env.API_KEY, 
-  api_secret:process.env.API_SECRET
-});
 
-
-router.post("/create",uploadSingle("image"),async(req, res) => {
-   try{
-
-      const result =await cloudinary.uploader.upload(req.file.path)
-   const order = await Order.create({
-      name:req.body.name,
-      price:req.body.price,
-      image: result.url,
-   })
-
-
-   return res.status(200).send(order)
-   } catch(err){
-      console.log(err)
-      return res.status(500).send({ message: err.message });
+router.post("/create", async (req, res) => {
+   try {
+    
+     const order = await Order.create({
+      id: req.body.id,
+       name: req.body.name,
+       price: req.body.price,
+       image: req.body.image,
+     });
+ 
+     return res.status(200).send(order);
+   } catch (err) {
+     console.log(err);
+     return res.status(500).send({ message: err.message });
    }
-
-
- })
+ });
 router.get("/create",async(req, res) => {
 
    try{
