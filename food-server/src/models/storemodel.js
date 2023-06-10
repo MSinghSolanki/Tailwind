@@ -15,4 +15,4 @@ const storeSchema = mongoose.Schema(
       }
 )
 
-module.exports = mongoose.model("order",orderSchema)
+module.exports = mongoose.model("store",storeSchema)
