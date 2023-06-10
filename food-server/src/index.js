@@ -12,10 +12,12 @@ app.use(express.urlencoded({extended:true}))
 const paymentRoute = require("./controller/paymentcontroller.js")
 const orderRoute = require("./controller/ordercontroller.js")
 const favRoute = require("./controller/Favouritecontroller.js")
+const storeRoute = require("./controller/storecontroller.js")
 
 app.use("/order",orderRoute)
 app.use("/favourite",favRoute)
 app.use("/api",paymentRoute)
+app.use("/item",storeRoute)
 
 
 
