@@ -10,7 +10,7 @@ import { Orders } from "./components/Orders";
 import { Favourite} from "./components/favourite";
 import { Route, Routes } from "react-router-dom";
 import { Home } from "./components/home";
-import { Success } from "./components/paymentsuccess";
+import { PaymentSuccessPage } from "./components/paymentsuccess";
 import { Footer } from "./components/footer";
 
 function App() {
@@ -24,7 +24,7 @@ function App() {
         <Route path="orders" element={<Orders/>}/>
         <Route path="invite" element={<Invite/>}/>
         <Route path="favourite" element={<Favourite/>}/>
-        <Route path="paymentsuccess" element={<Success/>}/>
+        <Route path="paymentsuccess" element={<PaymentSuccessPage/>}/>
         
       </Routes>
     

@@ -10,35 +10,61 @@ export const RegistrationForm = ({ onSuccess }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSuccess(name, email); // Call onSuccess with name and email
+    onSuccess(name, email);
     navigate("/", { state: { name, email } });
   };
 
   return (
     <Fragment>
-      <div className="">
-        <button className="bg-yellow-300 rounded-3xl w-24 h-6" onClick={() => showModal(true)}>
+      <div className="flex justify-center mt-10">
+        <button
+          className="px-8 py-2 bg-yellow-400 rounded-full text-white font-bold hover:bg-yellow-500 transition duration-300"
+          onClick={() => showModal(true)}
+        >
           Register
         </button>
       </div>
       <Address invisible={modal} onClose={() => showModal(false)}>
-        <form onSubmit={handleSubmit}>
-          <div className="flex bg-slate-100 h-18 ">
-            <label>
+        {modal && (
+          <div className="fixed top-0 right-0 z-10 p-2">
+            <button
+              className="text-white text-2xl focus:outline-none"
+              onClick={() => showModal(false)}
+            >
+              &times;
+            </button>
+          </div>
+        )}
+        <div className="bg-gray-200 py-8 px-6 rounded-md relative">
+          <form onSubmit={handleSubmit} className="flex flex-col items-center mt-6">
+            <label className="text-white text-xl">
               Name:
-              <input className="text-2xl " type="text" value={name} onChange={(e) => setName(e.target.value)} />
+              <input
+                className="mt-2 px-4 py-2 border border-gray-400 rounded focus:outline-none focus:border-blue-500 "
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
             </label>
             <br />
-            <label>
+            <label className="text-white text-xl">
               Email:
-              <input className="text-2xl" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input
+                className="mt-2 px-4 py-2 border border-gray-400 rounded focus:outline-none focus:border-blue-500 text-black"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </label>
-          </div>
-          <br />
-          <button className="bg-yellow-400 rounded-3xl text-white text-xl w-40" type="submit">
-            Register
-          </button>
-        </form>
+            <br />
+            <button
+              className="mt-6 px-8 py-2 bg-yellow-400 rounded-full text-white font-bold hover:bg-yellow-500 transition duration-300"
+              type="submit"
+            >
+              Register
+            </button>
+          </form>
+        </div>
       </Address>
     </Fragment>
   );

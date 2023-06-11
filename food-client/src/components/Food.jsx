@@ -5,6 +5,7 @@ import { AiFillHeart } from "react-icons/ai";
 export const Food = () => {
   const [orders, setOrders] = useState([]);
   const [sortingMethod, setSortingMethod] = useState("none");
+  const [isLoading, setIsLoading] = useState(true);
   const [formdata,setFormdata] = useState({
     id:"",
     name:"",
@@ -14,12 +15,14 @@ export const Food = () => {
 
   const fetchOrders = async () => {
     try {
+      setIsLoading(true);
       const response = await axios.get("http://localhost:2754/item/store");
       const data = response.data;
       setOrders(data.stores);
-      console.log(data)
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
@@ -72,6 +75,27 @@ export const Food = () => {
       console.log(error);
     }
   };
+  const Favourite = async (e) => {
+    try {
+      const formData = {
+        id: e.id,
+        name: e.name,
+        price: e.price,
+        image: e.image
+      };
+  console.log(formData)
+      await axios.post("http://localhost:2754/favourite/fav", formData);
+      // Reset form data after successful submission
+      setFormdata({
+        id: "",
+        name: "",
+        price: "",
+        image: ""
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
  
   
 
@@ -79,6 +103,10 @@ export const Food = () => {
 
   return (
     <div className="max-w-[1980px] m-auto px-4 py-12">
+      {isLoading?(
+        <p>Loading......</p>
+      ):(
+        <>
       <h1 className="text-red-600 font-bold text-4xl text-center">
         Top Rated Menu Items
       </h1>
@@ -150,7 +178,7 @@ export const Food = () => {
             />
             <AiFillHeart
               size={40}
-              onClick={() => {}}
+              onClick={() => {Favourite(e)}}
               className="hover:text-red-600 cursor-pointer text-gray-200"
             />
 
@@ -172,6 +200,8 @@ export const Food = () => {
           </div>
         ))}
       </div>
+      </>
+      )}
     </div>
   );
 };

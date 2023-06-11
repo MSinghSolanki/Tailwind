@@ -1,28 +1,28 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Address } from "./address";
 import axios from "axios";
 
 export const PaymentGateway = () => {
-  const [modal, showModal] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
   const [sub, setSub] = useState({
     email: "",
     address: "",
     pincode: "",
-    citi: "",
-    states: "",
+    city: "",
+    state: "",
   });
   const [submittedAddress, setSubmittedAddress] = useState(null);
 
-  const getPincodeAddress=(pin)=>{
-    axios.get(`https://api.postalpincode.in/pincode/${pin}`).then((res)=>{
-    
+  const getPincodeAddress = (pin) => {
+    axios.get(`https://api.postalpincode.in/pincode/${pin}`).then((res) => {
       setSub({
         ...sub,
-        ['citi']:res.data[0].PostOffice[0].District,
-        ['states']:res.data[0].PostOffice[0].State
-      })
-    })
-  }
+        city: res.data[0].PostOffice[0].District,
+        state: res.data[0].PostOffice[0].State,
+      });
+    });
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "pincode" && value.length === 6) {
@@ -36,13 +36,13 @@ export const PaymentGateway = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-   window.localStorage.setItem("submittedAddress", JSON.stringify(sub));
-    showModal(false);
-  };
-  const handleEditAddress = () => {
-    showModal(true);
+    window.localStorage.setItem("submittedAddress", JSON.stringify(sub));
+    setIsModalVisible(false);
   };
 
+  const handleEditAddress = () => {
+    setIsModalVisible(true);
+  };
 
   useEffect(() => {
     const storedAddress = localStorage.getItem("submittedAddress");
@@ -56,67 +56,66 @@ export const PaymentGateway = () => {
   }, []);
 
   return (
-    <Fragment>
+    <>
       <div className="">
         <button
-          className="bg-yellow-300 rounded-3xl w-52 h-11"
-          onClick={() => showModal(true)}
+          className="bg-yellow-300 rounded-3xl w-52 h-11 font-bold text-xl"
+          onClick={() => setIsModalVisible(true)}
         >
+          
           Add an Address
         </button>
       </div>
-      <Address invisible={modal} onClose={() => showModal(false)}>
-        <div className="rounded-xl text-2xl max-w-xl shadow-2xl my-48 border-gray-500 bg-white w-4/5">
-          <div className="flex">
-            <div>
-              <h2>Email</h2>
-              <input
-                onChange={handleChange}
-                name="email"
-                className="border-2 border-black"
-                type="email"
-                placeholder="Enter Email"
-              />
-            </div>
+      <Address invisible={isModalVisible} onClose={() => setIsModalVisible(false)}>
+      <form className="rounded-xl text-2xl max-w-xl shadow-2xl my-48 border-gray-500 bg-white w-4/5 p-8 relative z-50">
+          <div className="mb-4">
+            <h2>Email</h2>
+            <input
+              onChange={handleChange}
+              name="email"
+              className="border-2 border-black p-2 w-full"
+              type="email"
+              placeholder="Enter Email"
+            />
           </div>
-          <div>
-            <h1>Address</h1>
+          <div className="mb-4">
+            <h2>Address</h2>
             <input
               onChange={handleChange}
               name="address"
-              className="border-2 border-black"
+              className="border-2 border-black p-2 w-full"
               type="text"
               placeholder="Enter Your Address"
             />
           </div>
-          <div>
-            <h1>PinCode</h1>
+          <div className="mb-4">
+            <h2>PinCode</h2>
             <input
               name="pincode"
               onChange={handleChange}
-              className="border-2 border-black"
-              type="Number"
+              className="border-2 border-black p-2 w-full"
+              type="number"
               placeholder="Enter PinCode"
             />
           </div>
-          <div>
-            <h1>City</h1>
+          <div className="mb-4">
+            <h2>City</h2>
             <input
               onChange={handleChange}
-              name="citi"
-              value={sub.citi}
-              className="border-2 border-black"
+              name="city"
+              value={sub.city}
+              className="border-2 border-black p-2 w-full"
               type="text"
               placeholder="Enter City"
             />
           </div>
-          <div>
-            <h1>State</h1>
+          <div className="mb-4">
+            <h2>State</h2>
             <input
               onChange={handleChange}
-              name="states"
-              value={sub.states}
-              className="border-2 border-black"
+              name="state"
+              value={sub.state}
+              className="border-2 border-black p-2 w-full"
               type="text"
               placeholder="Enter State"
             />
@@ -127,17 +126,14 @@ export const PaymentGateway = () => {
           >
             Submit
           </button>
-        </div>
+        </form>
       </Address>
 
       {submittedAddress && (
         <div className="mt-8">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold">Submitted Address:</h2>
-            <button
-              className="text-blue-500 underline"
-              onClick={handleEditAddress}
-            >
+            <button className="text-blue-500 underline" onClick={handleEditAddress}>
               Edit Address
             </button>
           </div>
@@ -152,14 +148,14 @@ export const PaymentGateway = () => {
               <span className="font-bold">PinCode:</span> {submittedAddress.pincode}
             </p>
             <p className="text-lg">
-              <span className="font-bold">City:</span> {submittedAddress.citi}
+              <span className="font-bold">City:</span> {submittedAddress.city}
             </p>
             <p className="text-lg">
-              <span className="font-bold">State:</span> {submittedAddress.states}
+              <span className="font-bold">State:</span> {submittedAddress.state}
             </p>
           </div>
         </div>
       )}
-    </Fragment>
+    </>
   );
 };

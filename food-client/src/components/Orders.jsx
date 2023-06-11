@@ -1,13 +1,22 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { PaymentGateway } from "./paymentgateway";
-import { Fragment } from "react";
-import { Popover, PopoverHandler, PopoverContent, Button } from "@material-tailwind/react";
+// import { PaymentGateway } from "./paymentgateway";
+// import { Fragment } from "react";
+// import { Popover, PopoverHandler, PopoverContent, Button } from "@material-tailwind/react";
 import { Link } from "react-router-dom";
 
 export const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [showAddressForm, setShowAddressForm] = useState(false);
+  const [addressData, setAddressData] = useState({
+    address: "",
+    mobileNumber: "",
+    pincode: "",
+    state: "",
+    city: "",
+  });
+  const [submittedAddress, setSubmittedAddress] = useState(null);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -56,10 +65,141 @@ export const Orders = () => {
     razor.open();
   };
 
+  const toggleAddressForm = () => {
+    setShowAddressForm(!showAddressForm);
+  };
+
+  const submitAddressForm = (e) => {
+    e.preventDefault();
+    // Store the submitted address
+    setSubmittedAddress(addressData);
+    // Reset form fields
+    setAddressData({
+      address: "",
+      mobileNumber: "",
+      pincode: "",
+      state: "",
+      city: "",
+    });
+    // Hide the address form
+    setShowAddressForm(false);
+  };
+
+  const handleAddressChange = (e) => {
+    setAddressData({
+      ...addressData,
+      [e.target.name]: e.target.value,
+    });
+  };
   return (
     <div>
-      <PaymentGateway />
+   <div>
+        {/* Button to toggle the address form */}
+        <button
+          className="text-gray-900 bg-[#F7BE38] hover:bg-[#F7BE38]/90 focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 mr-2 mb-2"
+          onClick={toggleAddressForm}
+        >
+          Add Address
+        </button>
 
+        {/* Address form */}
+        {showAddressForm && (
+          <form onSubmit={submitAddressForm} className="mt-4">
+            {/* Add your address form fields here */}
+            <div className="mb-4">
+              <label htmlFor="address" className="text-lg font-medium">
+                Address:
+              </label>
+              <input
+                type="text"
+                id="address"
+                name="address"
+                value={addressData.address}
+                onChange={handleAddressChange}
+                className="border-2 border-gray-300 rounded-lg p-2 w-full"
+                required
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="mobileNumber" className="text-lg font-medium">
+                Mobile Number:
+              </label>
+              <input
+                type="text"
+                id="mobileNumber"
+                name="mobileNumber"
+                value={addressData.mobileNumber}
+                onChange={handleAddressChange}
+                className="border-2 border-gray-300 rounded-lg p-2 w-full"
+                required
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="pincode" className="text-lg font-medium">
+                Pincode:
+              </label>
+              <input
+                type="text"
+                id="pincode"
+                name="pincode"
+                value={addressData.pincode}
+                onChange={handleAddressChange}
+                className="border-2 border-gray-300 rounded-lg p-2 w-full"
+                required
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="state" className="text-lg font-medium">
+                State:
+              </label>
+              <input
+                type="text"
+                id="state"
+                name="state"
+                value={addressData.state}
+                onChange={handleAddressChange}
+                className="border-2 border-gray-300 rounded-lg p-2 w-full"
+                required
+              />
+            </div>
+
+            <div className="mb-4">
+              <label htmlFor="city" className="text-lg font-medium">
+                City:
+              </label>
+              <input
+                type="text"
+                id="city"
+                name="city"
+                value={addressData.city}
+                onChange={handleAddressChange}
+                className="border-2 border-gray-300 rounded-lg p-2 w-full"
+                required
+              />
+            </div>
+
+            <button type="submit" className="bg-blue-500 text-white rounded-lg px-4 py-2 mt-4">
+              Submit Address
+            </button>
+          </form>
+        )}
+      </div>
+      <div>
+      {submittedAddress && (
+        <div className="mt-4">
+          <h2 className="text-lg font-medium mb-2">Submitted Address:</h2>
+          <p>Address: {submittedAddress.address}</p>
+          <p>Mobile Number: {submittedAddress.mobileNumber}</p>
+          <p>Pincode: {submittedAddress.pincode}</p>
+          <p>State: {submittedAddress.state}</p>
+          <p>City: {submittedAddress.city}</p>
+        </div>
+      )}
+    </div>
+    
       <div>
         <div className="flex justify-around sm:my-10 sm:max-w-5xl xl:my-4 xl:max-w-6xl xl:mt-40">
           <div>

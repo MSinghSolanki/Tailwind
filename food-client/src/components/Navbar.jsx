@@ -1,34 +1,34 @@
 import React, { useContext, useEffect } from "react";
 import {FaUserFriends, FaWallet} from "react-icons/fa";
 import {FaAlignLeft} from  "react-icons/fa";
-import {FaSistrix} from "react-icons/fa"
-import {BsFillCartFill, BsFillSaveFill} from "react-icons/bs"
+// import {FaSistrix} from "react-icons/fa"
+// import {AiOutlineShoppingCart} from "react-icons/ai"
 import {AiOutlineClose} from "react-icons/ai"
 import {TbTruckDelivery} from "react-icons/tb"
-import {MdHelp,MdFavorite} from "react-icons/md"
+import {MdFavorite} from "react-icons/md"
 import { useState } from 'react';
 import logo1 from "./images/logo.png"
-import axios from "axios";
+// import axios from "axios";
 import {Link} from "react-router-dom";
 import { RegistrationForm } from "./register";
-import {DarkModeToggle } from "./icons/darlig";
+// import {DarkModeToggle } from "./icons/darlig";
 
 export const Navbar = () => {
-  const [count, setCount] = useState([]);
+  // const [count, setCount] = useState([]);
   const [showPopup, setShowPopup] = useState(true);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const counts = () => {
-    axios.get("http://localhost:2754/item/store").then((res) => {
-      setCount(res.data.length);
-    });
-  };
+  // const [isDarkMode, setIsDarkMode] = useState(false);
+  // const counts = () => {
+  //   axios.get("http://localhost:2754/item/store").then((res) => {
+  //     setCount(res.data.length);
+  //   });
+  // };
 
-  useEffect(() => {
-    counts();
-  }, []);
+  // useEffect(() => {
+  //   counts();
+  // }, []);
 
 
   useEffect(() => {
@@ -58,24 +58,26 @@ export const Navbar = () => {
     localStorage.clear();
 };
 
-useEffect(() => {
-  localStorage.setItem("isDarkMode", isDarkMode);
-  applyTheme();
-}, [isDarkMode]);
+// useEffect(() => {
+//   localStorage.setItem("isDarkMode", isDarkMode);
+//   applyTheme();
+// }, [isDarkMode]);
 
-const applyTheme = () => {
-  const rootElement = document.documentElement;
-  if (isDarkMode) {
-    rootElement.classList.add("dark");
-  } else {
-    rootElement.classList.remove("dark");
-  }
-};
+// const applyTheme = () => {
+//   const rootElement = document.documentElement;
+//   if (isDarkMode) {
+//     rootElement.classList.add("dark");
+//   } else {
+//     rootElement.classList.remove("dark");
+//   }
+// };
 
 
   return (
+    
     <div className='flex max-w-[1980px] mx-auto justify-between 
     items-center p-4 shadow-2xl sticky inset-0 z-10 bg-white'>
+     
       <div className='flex items-center'>
         <div onClick={stopscroll}
         className='cursor-pointer'>
@@ -123,11 +125,7 @@ const applyTheme = () => {
    </div> */}
    {/* {Cart button} */}
 
-   <button className='bg-transparent hidden md:flex items-center py-2
-   rounded-full w-20 hover:scale-105 duration-300  pr-4'>
-
-<Link to="/orders" className="flex"><TbTruckDelivery size={60} className/><span className=" bg-orange-300 text-white w-3 h-6 mb-5 rounded-full">{count}</span></Link>
-   </button>
+ 
  
    
    {/* Mobile Menu */}
