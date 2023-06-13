@@ -40,7 +40,7 @@ export const RegistrationForm = ({ onSuccess }) => {
             <label className="text-white text-xl">
               Name:
               <input
-                className="mt-2 px-4 py-2 border border-gray-400 rounded focus:outline-none focus:border-blue-500 "
+                className="mt-2 px-4 py-2 border border-gray-400 rounded focus:outline-none focus:border-blue-500"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -58,11 +58,11 @@ export const RegistrationForm = ({ onSuccess }) => {
             </label>
             <br />
             <button
-              className="mt-6 px-8 py-2 bg-yellow-400 rounded-full text-white font-bold hover:bg-yellow-500 transition duration-300"
-              type="submit"
-            >
-              Register
-            </button>
+  className="px-4 py-2 sm:px-8 sm:py-2 bg-yellow-400 rounded-full text-white font-bold text-sm sm:text-base hover:bg-yellow-500 transition duration-300"
+  onClick={() => showModal(true)}
+>
+  Register
+</button>
           </form>
         </div>
       </Address>

@@ -1,35 +1,21 @@
 import React, { useContext, useEffect } from "react";
-import {FaUserFriends, FaWallet} from "react-icons/fa";
-import {FaAlignLeft} from  "react-icons/fa";
-// import {FaSistrix} from "react-icons/fa"
-// import {AiOutlineShoppingCart} from "react-icons/ai"
-import {AiOutlineClose} from "react-icons/ai"
-import {TbTruckDelivery} from "react-icons/tb"
-import {MdFavorite} from "react-icons/md"
+import { FaUserFriends, FaWallet } from "react-icons/fa";
+import { FaAlignLeft } from "react-icons/fa";
+import { AiOutlineClose } from "react-icons/ai";
+import { TbTruckDelivery } from "react-icons/tb";
+import { MdFavorite } from "react-icons/md";
 import { useState } from 'react';
-import logo1 from "./images/logo.png"
-// import axios from "axios";
-import {Link} from "react-router-dom";
+import logo1 from "./images/logo.png";
+import { Link, useNavigate } from "react-router-dom";
 import { RegistrationForm } from "./register";
-// import {DarkModeToggle } from "./icons/darlig";
 
 export const Navbar = () => {
-  // const [count, setCount] = useState([]);
   const [showPopup, setShowPopup] = useState(true);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [close, setClose] = useState(false);
 
-  // const [isDarkMode, setIsDarkMode] = useState(false);
-  // const counts = () => {
-  //   axios.get("http://localhost:2754/item/store").then((res) => {
-  //     setCount(res.data.length);
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   counts();
-  // }, []);
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.getItem("name") && localStorage.getItem("email")) {
@@ -39,14 +25,18 @@ export const Navbar = () => {
     }
   }, []);
 
-  const [close, setClose] = useState(false);
+  useEffect(() => {
+    return () => {
+      setClose(false);
+    };
+  }, [navigate]);
 
-  const startScoll = () => {
+  const startScroll = () => {
     setClose(false);
     document.body.style.overflow = "unset";
   };
 
-  const stopscroll = () => {
+  const stopScroll = () => {
     setClose(!close);
 
     if (typeof window !== "undefined" && window.document) {
@@ -56,44 +46,24 @@ export const Navbar = () => {
 
   window.onbeforeunload = function (e) {
     localStorage.clear();
-};
-
-// useEffect(() => {
-//   localStorage.setItem("isDarkMode", isDarkMode);
-//   applyTheme();
-// }, [isDarkMode]);
-
-// const applyTheme = () => {
-//   const rootElement = document.documentElement;
-//   if (isDarkMode) {
-//     rootElement.classList.add("dark");
-//   } else {
-//     rootElement.classList.remove("dark");
-//   }
-// };
-
+  };
 
   return (
-    
-    <div className='flex max-w-[1980px] mx-auto justify-between 
-    items-center p-4 shadow-2xl sticky inset-0 z-10 bg-white'>
-     
+    <div className=' flex max-w-[1980px] mx-auto justify-between items-center p-4 shadow-2xl sticky inset-0 z-10 bg-white'>
       <div className='flex items-center'>
-        <div onClick={stopscroll}
-        className='cursor-pointer'>
-    <FaAlignLeft className='text-4xl'/>
+        <div onClick={stopScroll} className='cursor-pointer'>
+          <FaAlignLeft className='text-4xl' />
+        </div>
+        <Link to="/">
+          <img className='w-16 sm:w-20' src={logo1} alt="Logo" />
+        </Link>
+        <div className='hidden sm:flex items-center bg-gray-200 rounded-full p-1 text-sm'>
+          <p className='text-black hover:bg-black hover:text-white rounded-full'>Delivery</p>
+          <p className="ml-1 text-black hover:bg-black rounded-full hover:text-white">Pickup</p>
+        </div>
       </div>
-  <Link to="/"><img className='w-20' src={logo1}/></Link>
-   <div className='flex lg:flex items-center bg-gray-200 rounded-full p-1 text-[14px]
-   '>
-    <p  className='text-black hover:bg-black hover:text-white rounded-full'> Delivery</p>
-    <p className="ml-1 text-black hover:bg-black rounded-full hover:text-white">Pickup</p>
-   </div>
-  
-   </div>
-   <div>
- 
-        <h1 className="text-4xl font-bold">
+      <div>
+        <h1 className=" lg:text-4xl font-bold sm:text-xl xl:4xl md:4xl">
           Quality and <span className="text-orange-500 font-bold">Quantity</span>
         </h1>
         {name && email ? (
@@ -104,7 +74,7 @@ export const Navbar = () => {
         ) : (
           <div>
             {showPopup && (
-              <RegistrationForm className=""
+              <RegistrationForm
                 onSuccess={(name, email) => {
                   setName(name);
                   setEmail(email);
@@ -117,46 +87,31 @@ export const Navbar = () => {
           </div>
         )}
       </div>
-   {/* Search Menu
-   <div className='bg-gray-200 rounded-full items-center px-2 w-[200px]
-   sm:w-[400px] lg:w-[500px] flex hover:scale-105 duration-300'>
-    <FaSistrix size={20}/>
-    <input className='bg-transparent p-2 focus:outline-none' type='text' placeholder='Search Food'/>
-   </div> */}
-   {/* {Cart button} */}
-
- 
- 
-   
-   {/* Mobile Menu */}
-   {/* Overlay */}
-   {close? <div className='bg-black/80 fixed w-full h-screen z-10 top-0 left-0'>
-   </div> :"" }
-  
-   {/* Side Bar */}
-   <div className={close?'fixed top-0 left-0 w-[300px] bg-white h-screen z-10 duration-300':'fixed top-0 left-[-100%] w-[300px] bg-white h-screen z-10 duration-300'}>
-
-
-{/* Close menu */}
-<AiOutlineClose onClick={startScoll}
- size={30} className='absolute right-4' cursor-pointer/>
-<img className='w-25' src={logo1}/>
-<nav>
-  <ul className='flex flex-col p-4 text-gray-800'>
-    <li className='flex text-xl p-4 cursor-pointer'><TbTruckDelivery size={25} className="mr-4 "/>
-    <Link to="/orders">Orders</Link></li>
-    <li className='flex text-xl p-4 cursor-pointer'><MdFavorite size={25} className="mr-4"/>
-    <Link to="/favourite">Favorites</Link></li>
-    <li className='flex text-xl p-4 cursor-pointer'><FaWallet size={25} className="mr-4"/>
-    <Link to="/wallet">Wallet</Link></li>
-    <li className='flex text-xl p-4 cursor-pointer'><FaUserFriends size={25} className="mr-4"/>
-    <Link to="/invite">Invite Friend</Link></li>
-  </ul>
-</nav>
-   </div>
+      {close ? <div className='bg-black/80 fixed w-full h-screen z-10 top-0 left-0'></div> : ""}
+      <div className={close ? 'fixed top-0 left-0 w-[300px] bg-white h-screen z-10 duration-300' : 'fixed top-0 left-[-100%] w-[300px] bg-white h-screen z-10 duration-300'}>
+        <AiOutlineClose onClick={startScroll} size={30} className='absolute right-4' cursor-pointer />
+        <img className='w-64 sm:w-25' src={logo1} alt="Logo" />
+        <nav>
+          <ul className='flex flex-col p-4 text-gray-800'>
+            <li className='flex text-lg p-4 cursor-pointer'>
+              <TbTruckDelivery size={25} className="mr-4" />
+              <Link to="/orders">Orders</Link>
+            </li>
+            <li className='flex text-lg p-4 cursor-pointer'>
+              <MdFavorite size={25} className="mr-4" />
+              <Link to="/favourite">Favorites</Link>
+            </li>
+            <li className='flex text-lg p-4 cursor-pointer'>
+              <FaWallet size={25} className="mr-4" />
+              <Link to="/wallet">Wallet</Link>
+            </li>
+            <li className='flex text-lg p-4 cursor-pointer'>
+              <FaUserFriends size={25} className="mr-4" />
+              <Link to="/invite">Invite Friend</Link>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
-
-  )
-
-
-}
+  );
+};
