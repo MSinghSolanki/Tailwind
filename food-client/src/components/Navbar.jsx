@@ -33,15 +33,10 @@ export const Navbar = () => {
 
   const startScroll = () => {
     setClose(false);
-    document.body.style.overflow = "unset";
   };
 
   const stopScroll = () => {
-    setClose(!close);
-
-    if (typeof window !== "undefined" && window.document) {
-      document.body.style.overflow = "hidden";
-    }
+    setClose(true);
   };
 
   window.onbeforeunload = function (e) {
@@ -49,7 +44,7 @@ export const Navbar = () => {
   };
 
   return (
-    <div className=' flex max-w-[1980px] mx-auto justify-between items-center p-4 shadow-2xl sticky inset-0 z-10 bg-white'>
+    <div className='flex max-w-[1980px] mx-auto justify-between items-center p-4 shadow-2xl sticky inset-0 z-10 bg-white'>
       <div className='flex items-center'>
         <div onClick={stopScroll} className='cursor-pointer'>
           <FaAlignLeft className='text-4xl' />
