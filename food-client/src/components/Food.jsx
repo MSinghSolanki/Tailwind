@@ -38,12 +38,9 @@ export const Food = () => {
   const filtertype = (category) => {
     const filtered = orders.filter((e) => e.category === category);
     setFilteredOrders(filtered);
-    console.log(filtered)
   };
-
   useEffect(() => {
     const method = {
-      none: { method: (a, b) => null },
       ascending: { method: (b, a) => (a.price < b.price ? 1 : -1) },
       descending: { method: (a, b) => (a.price > b.price ? -1 : 1) },
     }[sortingMethod]?.method;
@@ -88,13 +85,6 @@ export const Food = () => {
       };
   console.log(formData)
       await axios.post("http://localhost:2754/favourite/fav", formData);
-      // Reset form data after successful submission
-      setFormdata({
-        id: "",
-        name: "",
-        price: "",
-        image: ""
-      });
     } catch (error) {
       console.log(error);
     }
@@ -128,30 +118,31 @@ export const Food = () => {
             >
               All
             </button>
-            <button
-              onClick={() => filtertype("Burgers")}
-              className="m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
-            >
-              Burgers
-            </button>
-            <button
-              onClick={() => filtertype("Pizza")}
-              className="m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
-            >
-              Pizza
-            </button>
-            <button
-              onClick={() => filtertype("Salad")}
-              className="m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
-            >
-              Salad
-            </button>
-            <button
-              onClick={() => filtertype("Paneer")}
-              className="m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
-            >
-              Paneer
-            </button>
+
+           <button
+  onClick={() => filtertype("Burgers")}
+  className="m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
+>
+  Burgers
+</button>
+<button
+  onClick={() => filtertype("Pizza")}
+  className="m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
+>
+  Pizza
+</button>
+<button
+  onClick={() => filtertype("Salad")}
+  className="m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
+>
+  Salad
+</button>
+<button
+  onClick={() => filtertype("Paneer")}
+  className="m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
+>
+  Paneer
+</button>
           </div>
         </div>
         {/* Filter price */}
@@ -170,7 +161,7 @@ export const Food = () => {
       </div>
       {/* Display food */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
-        {orders.map((e, ei) => (
+      {filteredOrders.map((e, ei) => (
           <div
             key={ei}
             className="border shadow-lg rounded-lg hover:scale-105 duration-300"
