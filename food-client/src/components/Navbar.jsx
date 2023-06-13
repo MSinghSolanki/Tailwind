@@ -8,7 +8,8 @@ import { useState } from 'react';
 import logo1 from "./images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { RegistrationForm } from "./register";
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 export const Navbar = () => {
   const [showPopup, setShowPopup] = useState(true);
   const [name, setName] = useState("");
@@ -43,8 +44,20 @@ export const Navbar = () => {
     localStorage.clear();
   };
 
+  const handleNavigation = (event) => {
+    if (!name || !email) {
+      event.preventDefault(); // Stop navigation
+      toast.error("Please register yourself."); // Redirect to the desired page
+    } else {
+      toast.error("Please register yourself."); // Show the toast notification
+      navigate("/"); // Redirect to the home page
+    }
+  };
   return (
+    <div>
+    <ToastContainer></ToastContainer>
     <div className='flex max-w-[1980px] mx-auto justify-between items-center p-4 shadow-2xl sticky inset-0 z-10 bg-white'>
+   
       <div className='flex items-center'>
         <div onClick={stopScroll} className='cursor-pointer'>
           <FaAlignLeft className='text-4xl' />
@@ -90,23 +103,24 @@ export const Navbar = () => {
           <ul className='flex flex-col p-4 text-gray-800'>
             <li className='flex text-lg p-4 cursor-pointer'>
               <TbTruckDelivery size={25} className="mr-4" />
-              <Link to="/orders">Orders</Link>
+              <Link to="/orders" onClick={handleNavigation}>Orders</Link>
             </li>
             <li className='flex text-lg p-4 cursor-pointer'>
               <MdFavorite size={25} className="mr-4" />
-              <Link to="/favourite">Favorites</Link>
+              <Link to="/favourite" onClick={handleNavigation}>Favorites</Link>
             </li>
             <li className='flex text-lg p-4 cursor-pointer'>
               <FaWallet size={25} className="mr-4" />
-              <Link to="/wallet">Wallet</Link>
+              <Link to="/wallet" onClick={handleNavigation}>Wallet</Link>
             </li>
             <li className='flex text-lg p-4 cursor-pointer'>
               <FaUserFriends size={25} className="mr-4" />
-              <Link to="/invite">Invite Friend</Link>
+              <Link to="/invite" onClick={handleNavigation}>Invite Friend</Link>
             </li>
           </ul>
         </nav>
       </div>
+    </div>
     </div>
   );
 };
