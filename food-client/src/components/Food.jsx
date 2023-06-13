@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { AiFillHeart } from "react-icons/ai";
-
+import {Link} from "react-router-dom";
 export const Food = () => {
   const [orders, setOrders] = useState([]);
+  const [filteredOrders, setFilteredOrders] = useState([]);
   const [sortingMethod, setSortingMethod] = useState("none");
   const [isLoading, setIsLoading] = useState(true);
+  const [showCart, setShowCart] = useState(false);
+  const [cartCount, setCartCount] = useState(0);
   const [formdata,setFormdata] = useState({
     id:"",
     name:"",
@@ -19,7 +22,9 @@ export const Food = () => {
       const response = await axios.get("http://localhost:2754/item/store");
       const data = response.data;
       setOrders(data.stores);
+      setFilteredOrders(data.stores);
       setIsLoading(false);
+      console.log(data.stores)
     } catch (error) {
       console.log(error);
       setIsLoading(false);
@@ -31,23 +36,20 @@ export const Food = () => {
   }, []);
 
   const filtertype = (category) => {
-    setOrders(
-      orders.filter((e) => {
-        return e.category === category;
-      })
-    );
-  };
-
-  const filterprice = {
-    none: { method: (a, b) => null },
-    ascending: { method: (b, a) => (a.price < b.price ? 1 : -1) },
-    descending: { method: (a, b) => (a.price > b.price ? -1 : 1) },
+    const filtered = orders.filter((e) => e.category === category);
+    setFilteredOrders(filtered);
+    console.log(filtered)
   };
 
   useEffect(() => {
-    const method = filterprice[sortingMethod].method;
+    const method = {
+      none: { method: (a, b) => null },
+      ascending: { method: (b, a) => (a.price < b.price ? 1 : -1) },
+      descending: { method: (a, b) => (a.price > b.price ? -1 : 1) },
+    }[sortingMethod]?.method;
+  
     if (method) {
-      setOrders([...orders].sort((a, b) => method(a, b)));
+      setOrders((o) => [...o].sort((a, b) => method(a, b)));
     } else {
       fetchOrders();
     }
@@ -71,6 +73,7 @@ export const Food = () => {
         price: "",
         image: ""
       });
+      setCartCount((count) => count + 1);
     } catch (error) {
       console.log(error);
     }
@@ -98,7 +101,9 @@ export const Food = () => {
   };
  
   
-
+  const handleCartClick = () => {
+    setShowCart(!showCart);
+  };
 
 
   return (
@@ -124,7 +129,7 @@ export const Food = () => {
               All
             </button>
             <button
-              onClick={() => filtertype("Burger")}
+              onClick={() => filtertype("Burgers")}
               className="m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
             >
               Burgers
@@ -139,7 +144,7 @@ export const Food = () => {
               onClick={() => filtertype("Salad")}
               className="m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
             >
-              Salads
+              Salad
             </button>
             <button
               onClick={() => filtertype("Paneer")}
@@ -182,8 +187,11 @@ export const Food = () => {
               className="hover:text-red-600 cursor-pointer text-gray-200"
             />
 
-            <button
-              onClick={() => {createOrder(e)}}
+<button
+            onClick={() => {
+              createOrder(e);
+             handleCartClick()
+            }}
               className="bg-gray-400 text-white rounded-r-3xl w-32 h-11 hover:bg-black hover:text-white my-3"
             >
               Order Now
@@ -200,7 +208,31 @@ export const Food = () => {
           </div>
         ))}
       </div>
-      </>
+     {/* Cart sidebar */}
+     {showCart && (
+            <div className="fixed inset-0 flex items-center justify-end z-10">
+              <div className="absolute top-0 right-0 h-screen bg-gray-900 w-64 p-6">
+                <div className="flex justify-between mb-6">
+                  <h3 className="text-white text-lg">Cart</h3>
+                  <button
+                    className="text-white"
+                    onClick={handleCartClick}
+                  >
+                    Close
+                  </button>
+                </div>
+                <p className="text-white">
+                  Total items in cart: {cartCount}
+                </p>
+                <Link to="orders">
+                  <button className="bg-red-600 text-white py-2 px-4 rounded-lg mt-4">
+                    Go to Checkout
+                  </button>
+                </Link>
+              </div>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
