@@ -37,17 +37,17 @@ export const RegistrationForm = ({ onSuccess }) => {
         )}
         <div className="bg-gray-200 py-8 px-6 rounded-md relative">
           <form onSubmit={handleSubmit} className="flex flex-col items-center mt-6">
-            <label className="text-white text-xl">
+            <label className="text-black text-xl">
               Name:
               <input
-                className="mt-2 px-4 py-2 border border-gray-400 rounded focus:outline-none focus:border-blue-500"
+                className="mt-2 px-4 py-2 border border-gray-400 rounded focus:outline-none focus:border-blue-500 text-black"
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
             </label>
             <br />
-            <label className="text-white text-xl">
+            <label className="text-black text-xl">
               Email:
               <input
                 className="mt-2 px-4 py-2 border border-gray-400 rounded focus:outline-none focus:border-blue-500 text-black"
