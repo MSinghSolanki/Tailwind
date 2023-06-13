@@ -48,10 +48,7 @@ export const Navbar = () => {
     if (!name || !email) {
       event.preventDefault(); // Stop navigation
       toast.error("Please register yourself."); // Redirect to the desired page
-    } else {
-      toast.error("Please register yourself."); // Show the toast notification
-      navigate("/"); // Redirect to the home page
-    }
+    } 
   };
   return (
     <div>
