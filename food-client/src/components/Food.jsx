@@ -5,21 +5,13 @@ import { AiFillHeart } from "react-icons/ai";
 export const Food = () => {
   const [orders, setOrders] = useState([]);
   const [sortingMethod, setSortingMethod] = useState("none");
-  const [originalOrders, setOriginalOrders] = useState([]);
   const [filteredOrders, setFilteredOrders] = useState([]);
-  const [formdata,setFormdata] = useState({
-    id:"",
-    name:"",
-    price:"",
-    image:""
-  })
 
   const fetchOrders = async () => {
     try {
       const response = await axios.get("http://localhost:2754/item/store");
       const data = response.data;
       setOrders(data.stores);
-      console.log(data)
     } catch (error) {
       console.log(error);
     }
@@ -29,25 +21,26 @@ export const Food = () => {
     fetchOrders();
   }, []);
 
-  const filtertype = (category) => {
+  const filterType = (category) => {
     const filtered = orders.filter((e) => e.category === category);
     setFilteredOrders(filtered);
   };
 
-  const filterprice = {
+  const filterPrice = {
     none: { method: (a, b) => null },
     ascending: { method: (b, a) => (a.price < b.price ? 1 : -1) },
     descending: { method: (a, b) => (a.price > b.price ? -1 : 1) },
   };
 
   useEffect(() => {
-    const method = filterprice[sortingMethod].method;
+    const method = filterPrice[sortingMethod].method;
     if (method) {
-      setFilteredOrders([...filteredOrders].sort((a, b) => method(a, b)));
+      const sortedOrders = [...orders].sort((a, b) => method(a, b));
+      setFilteredOrders(sortedOrders);
     } else {
-      fetchOrders();
+      setFilteredOrders(orders);
     }
-  }, [sortingMethod]);
+  }, [sortingMethod, orders]);
 
   const createOrder = async (e) => {
     try {
@@ -55,25 +48,14 @@ export const Food = () => {
         id: e.id,
         name: e.name,
         price: e.price,
-        image: e.image
+        image: e.image,
       };
- 
+
       await axios.post("http://localhost:2754/order/create", formData);
-      // Reset form data after successful submission
-      setFormdata({
-        id: "",
-        name: "",
-        price: "",
-        image: ""
-      });
     } catch (error) {
       console.log(error);
     }
   };
- 
-  
-
-
 
   return (
     <div className="max-w-[1980px] m-auto px-4 py-12">
@@ -94,25 +76,25 @@ export const Food = () => {
               All
             </button>
             <button
-              onClick={() => filtertype("Burger")}
+              onClick={() => filterType("Burgers")}
               className="m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
             >
               Burgers
             </button>
             <button
-              onClick={() => filtertype("Pizza")}
+              onClick={() => filterType("Pizza")}
               className="m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
             >
               Pizza
             </button>
             <button
-              onClick={() => filtertype("Salad")}
+              onClick={() => filterType("Salad")}
               className="m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
             >
               Salads
             </button>
             <button
-              onClick={() => filtertype("Paneer")}
+              onClick={() => filterType("Paneer")}
               className="m-1 border-red-600 text-red-600 hover:bg-orange-600 hover:rounded-full hover:text-white"
             >
               Paneer
@@ -135,7 +117,7 @@ export const Food = () => {
       </div>
       {/* Display food */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
-      {filteredOrders.map((e, ei) => (
+        {filteredOrders.map((e, ei) => (
           <div
             key={ei}
             className="border shadow-lg rounded-lg hover:scale-105 duration-300"
@@ -153,7 +135,7 @@ export const Food = () => {
             />
 
             <button
-              onClick={() => {createOrder(e)}}
+              onClick={() => createOrder(e)}
               className="bg-gray-400 text-white rounded-r-3xl w-32 h-11 hover:bg-black hover:text-white my-3"
             >
               Order Now
