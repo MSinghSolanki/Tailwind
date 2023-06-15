@@ -5,6 +5,8 @@ import { AiFillHeart } from "react-icons/ai";
 export const Food = () => {
   const [orders, setOrders] = useState([]);
   const [sortingMethod, setSortingMethod] = useState("none");
+  const [originalOrders, setOriginalOrders] = useState([]);
+  const [filteredOrders, setFilteredOrders] = useState([]);
   const [formdata,setFormdata] = useState({
     id:"",
     name:"",
@@ -28,11 +30,8 @@ export const Food = () => {
   }, []);
 
   const filtertype = (category) => {
-    setOrders(
-      orders.filter((e) => {
-        return e.category === category;
-      })
-    );
+    const filtered = orders.filter((e) => e.category === category);
+    setFilteredOrders(filtered);
   };
 
   const filterprice = {
@@ -44,12 +43,11 @@ export const Food = () => {
   useEffect(() => {
     const method = filterprice[sortingMethod].method;
     if (method) {
-      setOrders([...orders].sort((a, b) => method(a, b)));
+      setFilteredOrders([...filteredOrders].sort((a, b) => method(a, b)));
     } else {
       fetchOrders();
     }
   }, [sortingMethod]);
-
 
   const createOrder = async (e) => {
     try {
@@ -59,7 +57,7 @@ export const Food = () => {
         price: e.price,
         image: e.image
       };
-  console.log(form)
+ 
       await axios.post("http://localhost:2754/order/create", formData);
       // Reset form data after successful submission
       setFormdata({
@@ -137,7 +135,7 @@ export const Food = () => {
       </div>
       {/* Display food */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
-        {orders.map((e, ei) => (
+      {filteredOrders.map((e, ei) => (
           <div
             key={ei}
             className="border shadow-lg rounded-lg hover:scale-105 duration-300"
