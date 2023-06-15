@@ -9,7 +9,7 @@ export const Food = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get("http://localhost:2754/item/store");
+      const response = await axios.get("https://hungerandbeats-backend.onrender.com/item/store");
       const data = response.data;
       setOrders(data.stores);
     } catch (error) {
@@ -51,7 +51,7 @@ export const Food = () => {
         image: e.image,
       };
 
-      await axios.post("http://localhost:2754/order/create", formData);
+      await axios.post("https://hungerandbeats-backend.onrender.com/order/create", formData);
     } catch (error) {
       console.log(error);
     }

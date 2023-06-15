@@ -35,7 +35,7 @@ export const Orders = () => {
   }, []);
 
   const checkoutHandler = async () => {
-    const { data } = await axios.post("http://localhost:2754/api/checkout", {
+    const { data } = await axios.post("https://hungerandbeats-backend.onrender.com/api/checkout", {
       amount: totalPrice,
     });
     const options = {
@@ -46,12 +46,12 @@ export const Orders = () => {
       description: "Test Transaction",
       image: "https://example.com/your_logo",
       order_id: data.order.id, // This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-      callback_url: "http://localhost:2754/api/payment",
+      callback_url: "https://hungerandbeats-backend.onrender.com/api/payment",
       prefill: {
         // We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number
         name: "Mohit Singh Solanki", // Your customer's name
         email: "Mohitsinghsolanki8@gmail.com",
-        contact: "4141414414114", // Provide the customer's phone number for better conversion rates
+        contact: "9057234821", // Provide the customer's phone number for better conversion rates
       },
       notes: {
         address: "Razorpay Corporate Office",

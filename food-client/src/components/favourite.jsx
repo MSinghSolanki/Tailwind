@@ -8,9 +8,9 @@ const[favss,setFavss] =useState([])
 
 const fetchOrders = async () => {
   try {
-    const response = await axios.get("http://localhost:2754/favourite/fav");
+    const response = await axios.get("https://hungerandbeats-backend.onrender.com/favourite/fav");
     const data = response.data;
-    setFavss(data.stores);
+    setFavss(data.favourites);
   } catch (error) {
     console.log(error);
   }
