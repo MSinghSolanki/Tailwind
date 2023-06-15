@@ -20,7 +20,7 @@ export const Orders = () => {
 
   useEffect(() => {
     const fetchOrders = async () => {
-      const response = await axios.get("http://localhost:2754/order/create");
+      const response = await axios.get("https://hungerandbeats-backend.onrender.com/order/create");
       const data = response.data;
       setOrders(data.orders);
 
