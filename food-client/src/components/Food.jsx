@@ -65,7 +65,7 @@ export const Food = () => {
         image: e.image,
       };
 
-      await axios.post("https://hungerandbeats-backend.onrender.com/fav/favourite", formData);
+      await axios.post("https://hungerandbeats-backend.onrender.com/favourite/fav", formData);
     } catch (error) {
       console.log(error);
     }
