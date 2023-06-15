@@ -56,6 +56,20 @@ export const Food = () => {
       console.log(error);
     }
   };
+  const favorder = async (e) => {
+    try {
+      const formData = {
+        id: e.id,
+        name: e.name,
+        price: e.price,
+        image: e.image,
+      };
+
+      await axios.post("https://hungerandbeats-backend.onrender.com/fav/favourite", formData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="max-w-[1980px] m-auto px-4 py-12">
@@ -130,7 +144,7 @@ export const Food = () => {
             />
             <AiFillHeart
               size={40}
-              onClick={() => {}}
+              onClick={() => {favorder(e)}}
               className="hover:text-red-600 cursor-pointer text-gray-200"
             />
 
