@@ -5,9 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start":"node src/index.js",
-    "dev":"nodemon src/index.js"
-  
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +19,7 @@
     "moongoose": "^0.0.5",
     "multer": "^1.4.5-lts.1",
     "node": "^20.2.0",
-    "razorpay": "^2.8.6"
+    "razorpay": "^2.8.6",
+    "update": "^0.7.4"
   }
 }
