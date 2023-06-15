@@ -58,7 +58,7 @@ const expectedSignature = crypto.createHmac("sha256",process.env.KEY_SECRET)
    razorpay_payment_id,
    razorpay_signature,
   })
-   res.redirect(`https://hungerandbeats-backend.onrender.com/paymentsuccess?reference=${razorpay_payment_id}`)
+   res.redirect(`https://hungerandbeats.vercel.app//paymentsuccess?reference=${razorpay_payment_id}`)
   }else{
    res.status(500).json({
       success:false
