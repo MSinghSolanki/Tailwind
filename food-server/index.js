@@ -1,5 +1,5 @@
 const express = require ("express");
-const connect = require ("./config/connect")
+const connect = require ("./src/config/connect.js")
 const app = express();
 
 const cors = require ("cors")
@@ -9,10 +9,10 @@ app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
-const paymentRoute = require("./controller/paymentcontroller.js")
-const orderRoute = require("./controller/ordercontroller.js")
-const favRoute = require("./controller/Favouritecontroller.js")
-const storeRoute = require("./controller/storecontroller.js")
+const paymentRoute = require("./src/controller/paymentcontroller.js")
+const orderRoute = require("./src/controller/ordercontroller.js")
+const favRoute = require("./src/controller/Favouritecontroller.js")
+const storeRoute = require("./src/controller/storecontroller.js")
 
 app.use("/order",orderRoute)
 app.use("/favourite",favRoute)
