@@ -7,7 +7,7 @@ import { FaShoppingCart } from "react-icons/fa";
 
 export const Food = () => {
   const [orders, setOrders] = useState([]);
-  const [count, setCount] = useState([]);
+  const [count, setCount] = useState(0);
   const [sortingMethod, setSortingMethod] = useState("none");
   const [filteredOrders, setFilteredOrders] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -39,6 +39,7 @@ const fetchOrders = async () => {
 
 useEffect(() => {
   fetchOrders();
+  cartget();
 }, []);
 
 const loadMoreOrders = () => {
