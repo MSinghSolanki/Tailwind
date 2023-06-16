@@ -214,12 +214,11 @@ const CartIcon = ({ onClick, count }) => {
         {count > 0 && (
           <div className="bg-red-600 rounded-full w-4 h-4 text-white text-xs flex items-center justify-center">
             {count}
-          
           </div>
         )}
       </div>
       <FaShoppingCart
-        className="h-8 w-8 cursor-pointer"
+        className="h-8 w-8 sm:h-10 sm:w-10 cursor-pointer"
         onClick={onClick}
       />
     </div>

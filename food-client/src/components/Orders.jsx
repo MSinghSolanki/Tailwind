@@ -37,7 +37,7 @@ export const Orders = () => {
 
   const clearOrders = async () => {
     try {
-      await axios.delete("https://hungerandbeats-backend.onrender.com/order/delete-all");
+      await axios.delete("https://hungerandbeats-backend.onrender.com/order/delete");
       setOrders([]);
       setTotalPrice(0);
       console.log("All items deleted successfully");
