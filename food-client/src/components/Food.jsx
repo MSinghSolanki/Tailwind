@@ -3,7 +3,8 @@ import axios from "axios";
 import { AiFillHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
-
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Food = () => {
   const [orders, setOrders] = useState([]);
@@ -63,7 +64,6 @@ const loadMoreOrders = () => {
       const response = await axios.get("https://hungerandbeats-backend.onrender.com/order/create");
       const data = response.data;
       setCount(data.orders.length);
-      console.log(data.orders.length)
     } catch (error) {
       console.log(error);
     }
@@ -93,6 +93,10 @@ const loadMoreOrders = () => {
     }
   }, [sortingMethod, filteredOrders, endIndex]);
 
+  const notify = () => {
+    toast.info("Please register yourself.", { autoClose: 3000 });
+  };
+
 
   const createOrder = async (e) => {
     try {
@@ -101,10 +105,11 @@ const loadMoreOrders = () => {
         name: e.name,
         price: e.price,
         image: e.image,
+        
       };
-
-      await axios.post("https://hungerandbeats-backend.onrender.com/order/create", formData);
-    } catch (error) {
+       await axios.post("https://hungerandbeats-backend.onrender.com/order/create", formData);
+       notify();  
+      } catch (error) {
       console.log(error);
     }
   };
@@ -125,6 +130,8 @@ const loadMoreOrders = () => {
 
   return (
     <div className="max-w-[1980px] m-auto px-4 py-12">
+      <ToastContainer></ToastContainer>
+      
       <h1 className="text-red-600 font-bold text-4xl text-center">
         Top Rated Menu Items
       </h1>
