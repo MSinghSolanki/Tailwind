@@ -10,7 +10,10 @@ export const Food = () => {
   const [count, setCount] = useState([]);
   const [sortingMethod, setSortingMethod] = useState("none");
   const [filteredOrders, setFilteredOrders] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(false);
+  const [visibleOrders, setVisibleOrders] = useState([]);
+  const [startIndex, setStartIndex] = useState(0);
+  const [endIndex, setEndIndex] = useState(4);
 
 let navigate = useNavigate()
 
@@ -18,21 +21,40 @@ const navigateToCart =()=>{
   navigate('orders')
 }
 
-  const fetchOrders = async () => {
-    try {
-      const response = await axios.get("https://hungerandbeats-backend.onrender.com/item/store");
-      const data = response.data;
-      setOrders(data.stores);
-      cartget(); 
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const fetchOrders = async () => {
+  try {
+    setIsLoading(true);
+    const response = await axios.get("https://hungerandbeats-backend.onrender.com/item/store");
+    const data = response.data;
+    setOrders(data.stores);
+    const initialOrders = data.stores.slice(startIndex, endIndex);
+    setFilteredOrders(initialOrders);
+    setVisibleOrders(initialOrders);
+    setIsLoading(false);
+  } catch (error) {
+    console.log(error);
+    setIsLoading(false);
+  }
+};
 
+useEffect(() => {
+  fetchOrders();
+}, []);
 
-  useEffect(() => {
-    fetchOrders();
-  }, []);
+const loadMoreOrders = () => {
+  if (endIndex >= orders.length) {
+    return; // No more orders to load
+  }
+
+  const nextStartIndex = startIndex + 4;
+  const nextEndIndex = endIndex + 4;
+  const nextOrders = orders.slice(nextStartIndex, nextEndIndex);
+  setFilteredOrders((prevOrders) => [...prevOrders, ...nextOrders]);
+  setVisibleOrders((prevOrders) => [...prevOrders, ...nextOrders]);
+  setStartIndex(nextStartIndex);
+  setEndIndex(nextEndIndex);
+};
+
 
 
   const cartget = async () => {
@@ -48,13 +70,10 @@ const navigateToCart =()=>{
  
 
 
-
-
-
-
   const filterType = (category) => {
     const filtered = orders.filter((e) => e.category === category);
     setFilteredOrders(filtered);
+    setVisibleOrders(filtered.slice(0, endIndex));
   };
 
   const filterPrice = {
@@ -66,12 +85,13 @@ const navigateToCart =()=>{
   useEffect(() => {
     const method = filterPrice[sortingMethod].method;
     if (method) {
-      const sortedOrders = [...orders].sort((a, b) => method(a, b));
-      setFilteredOrders(sortedOrders);
+      const sortedOrders = [...filteredOrders].sort((a, b) => method(a, b));
+      setVisibleOrders(sortedOrders.slice(0, endIndex));
     } else {
-      setFilteredOrders(orders);
+      setVisibleOrders(filteredOrders.slice(0, endIndex));
     }
-  }, [sortingMethod, orders]);
+  }, [sortingMethod, filteredOrders, endIndex]);
+
 
   const createOrder = async (e) => {
     try {
@@ -162,7 +182,7 @@ const navigateToCart =()=>{
       </div>
       {/* Display food */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
-        {filteredOrders.map((e, ei) => (
+      {visibleOrders.map((e, ei) => (
           <div
             key={ei}
             className="border shadow-lg rounded-lg hover:scale-105 duration-300"
@@ -196,7 +216,13 @@ const navigateToCart =()=>{
             </div>
           </div>
         ))}
-      </div>
+        {/* Load More button */}
+      {!isLoading && visibleOrders.length < orders.length && (
+        <button class=" bg-yellow-300 hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow" onClick={loadMoreOrders}>Load More</button>
+      )}
+        {/* Loading indicator */}
+        {isLoading && <p>Loading...</p>}
+    </div>
        {/* Display the cart icon */}
        <div className="fixed bottom-6 right-6 z-10">
       <CartIcon count={count} onClick={navigateToCart} />
