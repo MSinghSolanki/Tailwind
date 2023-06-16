@@ -1,25 +1,56 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
 import axios from "axios";
 import { AiFillHeart } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
+import { FaShoppingCart } from "react-icons/fa";
+
 
 export const Food = () => {
   const [orders, setOrders] = useState([]);
+  const [count, setCount] = useState([]);
   const [sortingMethod, setSortingMethod] = useState("none");
   const [filteredOrders, setFilteredOrders] = useState([]);
+
+
+let navigate = useNavigate()
+
+const navigateToCart =()=>{
+  navigate('orders')
+}
 
   const fetchOrders = async () => {
     try {
       const response = await axios.get("https://hungerandbeats-backend.onrender.com/item/store");
       const data = response.data;
       setOrders(data.stores);
+      cartget(); 
     } catch (error) {
       console.log(error);
     }
   };
 
+
   useEffect(() => {
     fetchOrders();
   }, []);
+
+
+  const cartget = async () => {
+    try {
+      const response = await axios.get("https://hungerandbeats-backend.onrender.com/order/create");
+      const data = response.data;
+      setCount(data.orders.length);
+      console.log(data.orders.length)
+    } catch (error) {
+      console.log(error);
+    }
+  };
+ 
+
+
+
+
+
 
   const filterType = (category) => {
     const filtered = orders.filter((e) => e.category === category);
@@ -166,6 +197,31 @@ export const Food = () => {
           </div>
         ))}
       </div>
+       {/* Display the cart icon */}
+       <div className="fixed bottom-6 right-6 z-10">
+      <CartIcon count={count} onClick={navigateToCart} />
+    </div>
+  </div>
+  );
+};
+
+
+// Create a new component for the cart icon
+const CartIcon = ({ onClick, count }) => {
+  return (
+    <div className="relative">
+      <div className="absolute -top-2 -right-2">
+        {count > 0 && (
+          <div className="bg-red-600 rounded-full w-4 h-4 text-white text-xs flex items-center justify-center">
+            {count}
+          
+          </div>
+        )}
+      </div>
+      <FaShoppingCart
+        className="h-8 w-8 cursor-pointer"
+        onClick={onClick}
+      />
     </div>
   );
 };

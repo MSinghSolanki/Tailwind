@@ -34,6 +34,21 @@ export const Orders = () => {
     fetchOrders();
   }, []);
 
+
+  const clearOrders = async () => {
+    try {
+      await axios.delete("https://hungerandbeats-backend.onrender.com/order/delete-all");
+      setOrders([]);
+      setTotalPrice(0);
+      console.log("All items deleted successfully");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+
+
   const checkoutHandler = async () => {
     const { data } = await axios.post("https://hungerandbeats-backend.onrender.com/api/checkout", {
       amount: totalPrice,
@@ -204,6 +219,9 @@ export const Orders = () => {
         <div className="flex justify-around sm:my-10 sm:max-w-5xl xl:my-4 xl:max-w-6xl xl:mt-40">
           <div>
             <h1 className="text-4xl font-bold">Your Shopping Cart</h1>
+          </div>
+          <div>
+            <button onClick={clearOrders} className="text-gray-900 bg-[#F7BE38] hover:bg-[#F7BE38]/90 focus:ring-4 focus:outline-none focus:ring-[#F7BE38]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#F7BE38]/50 mr-2 mb-2">Clear Cart</button>
           </div>
           <div>
             <h1 className="text-red-500 my-3 text-2xl hover:underline">
