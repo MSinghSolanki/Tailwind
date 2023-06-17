@@ -3,6 +3,8 @@ import axios from "axios";
 import { AiFillHeart } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const Food = () => {
   const [orders, setOrders] = useState([]);
@@ -91,7 +93,16 @@ const loadMoreOrders = () => {
     }
   }, [sortingMethod, filteredOrders, endIndex]);
 
- 
+ const created = ()=>{
+toast.success("order created succesfully,Check it out in cart")
+ }
+
+
+ const Added = ()=>{
+toast.success("Added to your favourites succesfully")
+ }
+
+
 
 
   const createOrder = async (e) => {
@@ -104,7 +115,7 @@ const loadMoreOrders = () => {
         
       };
        await axios.post("https://hungerandbeats-backend.onrender.com/order/create", formData);
-       
+       created();
       } catch (error) {
       console.log(error);
     }
@@ -119,6 +130,7 @@ const loadMoreOrders = () => {
       };
 
       await axios.post("https://hungerandbeats-backend.onrender.com/favourite/fav", formData);
+   Added();
     } catch (error) {
       console.log(error);
     }
@@ -126,7 +138,7 @@ const loadMoreOrders = () => {
 
   return (
     <div className="max-w-[1980px] m-auto px-4 py-12">
-    
+    <ToastContainer></ToastContainer>
       <h1 className="text-red-600 font-bold text-4xl text-center">
         Top Rated Menu Items
       </h1>
