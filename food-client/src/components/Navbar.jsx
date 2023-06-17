@@ -12,6 +12,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export const Navbar = () => {
   const [showPopup, setShowPopup] = useState(true);
+ 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [close, setClose] = useState(false);
